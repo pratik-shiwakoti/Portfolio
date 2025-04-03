@@ -10,7 +10,7 @@
 body {
     font-family: Arial, sans-serif;
     background: linear-gradient(to right, #c496f5, #96e4f5);
-    color: black;
+    
     line-height: 1.6;
     font-size: 1rem; /* Responsive font size */
 }
@@ -25,10 +25,10 @@ body {
 
 /* Sticky Header */
 header {
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
+    background: linear-gradient(to right, #b1f596, #ddd, #91dff1);
+    color: black;
     padding: 1.5% 0; /* Relative padding */
-    position: sticky;
+    position:static;
     top: 0;
     width: 100%;
     z-index: 1000;
@@ -38,7 +38,9 @@ header h1 {
     text-align: center;
     font-size: 2.5rem; /* Responsive font size */
 }
-
+header h1:hover{
+    color:rgb(22, 208, 222)
+}
 /* Navigation */
 nav ul {
     display: flex;
@@ -52,11 +54,12 @@ nav ul li {
 }
 
 nav ul li a {
-    color: white;
+    color: blue;
     text-decoration: none;
     font-weight: bold;
     transition: color 0.3s ease;
     font-size: 1rem; /* Responsive font size */
+    
 }
 
 nav ul li a:hover {
@@ -80,24 +83,32 @@ section {
     align-items: center; /* Align items in center */
     justify-content: space-between; /* Space between text and image */
     gap: 2%; /* Space between text and image */
+   background: white;
 }
 
 .about-text {
     flex: 1; /* Allows text to take up remaining space */
+    background: none;
+    color: #100f0f;
+    padding: 5%;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    min-width: auto;
+    max-width: 80%;
+    min-width: 60%;
 }
-
 .about-image img {
     width: 100%; /* Make image responsive */
     max-width: 220px; /* Limit max width */
     height: auto; /* Maintain aspect ratio */
     border-radius: 50%; /* Make image circular */
     object-fit: cover;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgb(17, 174, 205);
 }
 
 #projects {
     background: linear-gradient(to right, #96e4f5, #c496f5);
-    color: #333;
+    color: #000;
     width: auto;
 }
 
@@ -105,7 +116,6 @@ section {
     background: #e0f7fa;
     color: #333;
 }
-
 /* Skill & Project Grid */
 .skill-cards, .project-cards {
     display: grid;
@@ -123,34 +133,6 @@ section {
     max-width: 80%;
 }
 
-/* Contact Form */
-form {
-    max-width: 500px;
-    margin: auto;
-}
-
-form input, form textarea {
-    width: 100%;
-    padding: 3%;
-    margin: 2% 0;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-form button {
-    background: #333;
-    color: white;
-    padding: 3%;
-    border: none;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-}
-
-form button:hover {
-    background: #555;
-}
-
 /* Social Media Icons */
 .social-media {
     display: flex;
@@ -163,7 +145,7 @@ form button:hover {
 }
 
 .social-icon {
-    font-size: 1.8rem;
+    font-size: 1.4rem;
     transition: transform 0.3s ease;
 }
 
@@ -206,10 +188,10 @@ footer p {
 /* Marquee Animation */
 @keyframes marquee {
     from {
-        transform: translateX(100%);
+        transform: translateX(80%);
     }
     to {
-        transform: translateX(80%);
+        transform: translateX(-80%);
     }
 }
 
@@ -249,4 +231,246 @@ footer p {
     .about-image img {
         width: 80%; /* Make image more responsive */
     }
+}
+
+
+/* Responsive Dark Mode Toggle Switch */
+.dark-mode-toggle {
+    position: fixed;
+    top: 2vh;
+    right: 2vw;
+}
+
+.dark-mode-toggle input {
+    display: none;
+}
+
+.dark-mode-toggle label {
+    cursor: pointer;
+    background: #ddd;
+    width: 3rem;
+    height: 1.5rem;
+    border-radius: 50px;
+    position: relative;
+    display: block;
+    transition: 0.3s ease;
+}
+
+.dark-mode-toggle label::before {
+    content: "";
+    position: absolute;
+    width: 1.2rem;
+    height: 1.2rem;
+    background: white;
+    border-radius: 50%;
+    top: 50%;
+    left: 0.3rem;
+    transform: translateY(-50%);
+    transition: left 0.3s ease;
+}
+
+/* Improve Dark Mode Toggle Contrast */
+input:checked + label {
+    background: #444; /* Slightly lighter dark mode */
+}
+
+input:checked + label::before {
+    background: #ffeb3b; /* Brighter yellow */
+}
+
+/* Toggle Switch */
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 4rem;
+    height: 2rem;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    border-radius: 30px;
+    transition: 0.4s;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.3rem;
+}
+
+.icon {
+    font-size: 1rem;
+    position: absolute;
+    transition: 0.4s;
+}
+
+.sun {
+    right: 0.5rem;
+    opacity: 0; /* Hide sun initially */
+}
+
+.slider::before {
+    position: absolute;
+    content: "";
+    height: 1.5rem;
+    width: 1.5rem;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.4s;
+    left: 0.3rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Toggle Switch Activated (Dark Mode On) */
+input:checked + .slider {
+    background-color: #222;
+}
+
+input:checked + .slider .icon {
+    opacity: 0; /* Hide moon */
+}
+
+input:checked + .slider .sun {
+    opacity: 1; /* Show sun */
+}
+
+input:checked + .slider::before {
+    transform: translate(1.7rem, -50%);
+}
+
+/* Responsive Dark Mode Container */
+.dark-mode-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; /* Space between switch and text */
+}
+
+/* Responsive Font Size */
+.toggle-label {
+    font-size: clamp(12px, 1vw, 16px);
+    font-weight: bold;
+}
+/* Testimonial Section */
+.testimonial-container {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Next Button Styling */
+#next-testimonial {
+    background: rgb(1, 1, 78);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+#next-testimonial:hover {
+    background: #0056b3;
+    transform: scale(1.05);
+}
+
+#next-testimonial:focus {
+    outline: 3px solid #ffcc00;
+    outline-offset: 2px;
+}
+
+#next-testimonial:active {
+    background: #004494;
+    transform: scale(0.98);
+}
+/* Dark Mode Styling */
+.dark-mode {
+    background: linear-gradient(to right, #121212, #1e1e1e);
+    color: #e0e0e0;
+}
+
+.dark-mode header {
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.1), rgba(50, 50, 50, 0.1));
+}
+
+.dark-mode nav ul li a {
+    color: #e0e0e0;
+}
+
+/* Improve Dark Mode Links */
+.dark-mode nav ul li a:hover {
+    color: #ffcc00; /* Keep a warm highlight for dark mode */
+}
+
+.dark-mode section {
+    background: linear-gradient(to right, #222, #1a1a1a);
+    color: #e0e0e0;
+}
+
+.dark-mode .skill-card {
+    background: #525151;
+    color: white;
+    box-shadow: 8px 4px 8px rgba(202, 20, 20, 0.815);
+}
+.dark-mode .project-card{
+    background: #333;
+    color: #f0f0f0;
+    box-shadow: 8px 4px 8px rgba(155, 150, 9, 0.815);  
+}
+
+/* Adjust Footer for Dark Mode */
+.dark-mode footer {
+    background: linear-gradient(15deg, rgba(98, 97, 97, 0.919), rgba(13, 13, 13, 0.1), rgba(98, 97, 97, 0.919));
+    color: #ddd;
+}
+.dark-mode header{
+    background: linear-gradient(to right,rgba(98, 97, 97, 0.919), rgba(13, 13, 13, 0.1), rgba(98, 97, 97, 0.919));
+    color: #e0e0e0;
+}
+.dark-mode .testimonial-container {
+    background: #525151;
+    color: white;
+    box-shadow: 8px 4px 8px rgba(202, 20, 20, 0.815);
+}
+.dark-mode #contact {
+    background: #293131;
+    color: white;
+}
+.dark-mode #projects{
+    background: #424747;
+    color: #e0e0e0;
+}
+.dark-mode #about{
+    background: rgb(1, 1, 31);
+    color: #e0e0e0;
+}
+.dark-mode .about-container{
+    background: #5a5b5b;
+    color: #f0f0f0;
+    box-shadow: 8px 4px 8px rgba(155, 150, 9, 0.815);   
+}
+.dark-mode .about-text{
+    background: #5a5b5b;
+    color: white;
+    box-shadow: 8px 4px 8px rgba(202, 20, 20, 0.815);
+}
+.dark-mode .about-text p{
+    color: white;
+    
 }
