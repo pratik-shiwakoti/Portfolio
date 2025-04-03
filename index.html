@@ -11,114 +11,130 @@
 <body>
   <header>
     <div class="container">
-      <h1>Pratik Shiwakoti</h1>
-      <nav>
+      <h1 id="header-title">Pratik Shiwakoti</h1>
+      <nav aria-label="Main Navigation">
         <ul>
-          <li><a href="#about">About</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="#about" aria-label="About section">About</a></li>
+          <li><a href="#skills" aria-label="Skills section">Skills</a></li>
+          <li><a href="#projects" aria-label="Projects section">Projects</a></li>
+          <li><a href="#contact" aria-label="Contact section">Contact</a></li>
         </ul>
       </nav>
+
+      <div class="dark-mode-container">
+        <label id="dark-mode-toggle" class="toggle-switch">
+            <input type="checkbox" id="dark-mode-checkbox">
+            <span class="slider">
+                <span class="icon">☀️</span> <!-- Default moon icon -->
+                <span class="icon sun">🌙</span> <!-- Hidden sun icon -->
+            </span>
+        </label>
+        <span id="mode-indicator" class="toggle-label">Dark Mode</span> <!-- Dynamic mode text -->
+    </div>
+       
     </div>
   </header>
 
-  <section id="about" class="section">
+  <section id="about" class="section" aria-labelledby="about-title">
     <div class="container about-container">
       <div class="about-text">
-        <h2>About Me</h2>
+        <h2 id="about-title">About Me</h2>
+        <div class="about" role="text">
         <p>Welcome to my portfolio! My name is Pratik Shiwakoti, and I am a BIT Second Year student currently studying in Bhaktapur Multiple Campus.</p>
-        <p>I am a passionate IT student specializing in web development, programming, and design. I enjoy creating responsive, user-friendly websites and applications.</p>
-      </div>
+        <p>I am a passionate IT student specializing in web development, programming, and designing. I enjoy creating responsive, user-friendly websites and applications.</p>
+      </div></div>
       <div class="about-image">
-        <img src="profile.png" alt="Pratik Shiwakoti">
+        <img src="profile.png" alt="Profile picture of Pratik Shiwakoti" />
       </div>
     </div>
   </section>
-  
-  
 
-  <section id="skills" class="section">
+  <section id="skills" class="section" aria-labelledby="skills-title">
     <div class="container">
-      <h2>Skills</h2>
-      <div class="skill-card"><ul>
-        <li>HTML, CSS, JavaScript</li>
-        <li>Web Design</li>
-        <li>Responsive Design</li>
-        <li>Frontend Development (Optional)</li>
-        <li>Version Control (Git/Github)</li>
-      </ul>
-    </div></div>
+      <h2 id="skills-title">Skills</h2>
+      <div class="skill-card" role="list">
+        <div class="skill-item" role="listitem" aria-label="HTML Skill"><i class="fab fa-html5" style="color: #E44D26;"></i> HTML</div>
+        <div class="skill-item" role="listitem" aria-label="CSS Skill"><i class="fab fa-css3-alt" style="color: #1572B6;"></i> CSS</div>
+        <div class="skill-item" role="listitem" aria-label="JavaScript Skill"><i class="fab fa-js" style="color: #F7DF1E;"></i> JavaScript</div>
+        <div class="skill-item" role="listitem" aria-label="Web Design Skill"><i class="fas fa-paint-brush" style="color: #8A2BE2;"></i> Web Design</div>
+        <div class="skill-item" role="listitem" aria-label="Responsive Design Skill"><i class="fas fa-mobile-alt" style="color: #4CAF50;"></i> Responsive Design</div>
+        <div class="skill-item" role="listitem" aria-label="Git/GitHub Skill"><i class="fab fa-github" style="color: #333;"></i> Git/GitHub</div>
+      </div>
+    </div>
   </section>
 
-  <section id="projects" class="section">
+  <section id="projects" class="section" aria-labelledby="projects-title">
     <div class="container">
-      <h2>Projects</h2>
-      <div class="project-cards">
-        <!-- Example project -->
-        <div class="project-card">
-          <h3>Hikemandu Website</h3>
+      <h2 id="projects-title">Projects</h2>
+      <div class="project-cards" role="list">
+        <div class="project-card" role="listitem" aria-labelledby="hikemandu-project">
+          <h3 id="hikemandu-project">Hikemandu Website</h3>
           <p>A website designed for trekking and hiking enthusiasts, featuring maps, itineraries, and tips for outdoor adventures.</p>
         </div>
-        <!-- Add more projects here -->
       </div>
     </div>
   </section>
 
-  <section id="contact" class="section">
+  <section id="testimonials" class="section" aria-labelledby="testimonials-title">
     <div class="container">
-      <h2>Contact</h2>
-      <form action="#" method="POST">
-        <label for="name">Your Name:</label>
-        <input placeholder="Full Name" type="text" id="name" name="name" required>
-  
-        <label for="email">Email:</label>
-        <input placeholder="example123@gmail.com" type="email" id="email" name="email" required>
-  
-        <label for="message">Message:</label>
-        <textarea placeholder="Your Message" id="message" name="message" required></textarea>
-  
-        <button type="submit">Send Message</button>
-      </form>
-  
-      <div class="social-media">
-        <p>Connect with me on social media:</p>
-        <a href="https://www.facebook.com/your-profile" target="_blank">
-          <i class="fab fa-facebook social-icon facebook"></i>
-        </a>
-        <a href="https://www.instagram.com/your-profile" target="_blank">
-          <i class="fab fa-instagram social-icon instagram"></i>
-        </a>
-        <a href="https://www.twitter.com/your-profile" target="_blank">
-          <i class="fab fa-twitter social-icon twitter"></i>
-        </a>
-        
+      <h2 id="testimonials-title">Testimonials</h2>
+      <div class="testimonial-container">
+        <p id="testimonial-text" aria-live="polite">"Pratik is a talented developer with a keen eye for design!"</p>
+        <h4 id="testimonial-author">- Suman Basnet</h4>
+        <button id="next-testimonial" aria-label="Next testimonial">Next</button>
       </div>
     </div>
   </section>
-  
-  <footer>
+
+  <section id="contact" class="section" aria-labelledby="contact-title">
     <div class="container">
-      <p class="marquee">&copy; 2025 Pratik Shiwakoti</p>
-      <div class="social-media">
-        <a href="https://www.linkedin.com/in/your-profile" target="_blank">
-          <i class="fab fa-linkedin social-icon linkedin"></i>
-        </a>
-        <a href="https://github.com/your-profile" target="_blank">
-          <i class="fab fa-github social-icon github"></i>
-        </a>
-        <a href="https://www.twitter.com/your-profile" target="_blank">
-          <i class="fab fa-twitter social-icon twitter"></i>
-        </a>
-        <a href="https://www.facebook.com/your-profile" target="_blank">
+        <h2 id="contact-title">Contact</h2>
+        
+        <p>If you'd like to get in touch with me, feel free to reach out through any of the following methods:</p>
+
+        <div class="contact-info">
+            <p><strong>Email:</strong> <a style="color: #94daf4;" href="mailto:pratikshiwakoti105@gmail.com">pratikshiwakoti105@gmail.com</a></p>
+            <p><strong>Phone:</strong> <a style="color: #94daf4;" href="tel:9813092717">9813092717</a></p>
+        </div>
+
+      <div class="social-media" aria-labelledby="social-media-title">
+        <p id="social-media-title">You can also connect with me on my social media:</p>
+        <a href="https://facebook.com/Pratik.Shiwakoti.10" target="_blank" aria-label="Facebook Profile">
           <i class="fab fa-facebook social-icon facebook"></i>
         </a>
-        <a href="https://www.instagram.com/your-profile" target="_blank">
+        <a href="https://instagram.com/parr_tik" target="_blank" aria-label="Instagram Profile">
+          <i class="fab fa-instagram social-icon instagram"></i>
+        </a>
+        <a href="https://twitter.com/Pratik_Cwakoti" target="_blank" aria-label="Twitter Profile">
+          <i class="fab fa-twitter social-icon twitter"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer aria-labelledby="footer-title">
+    <div class="container">
+      <p id="footer-title" class="marquee" aria-live="polite">&copy; 2025 Pratik Shiwakoti</p>
+      <div class="social-media">
+        <a href="https://www.linkedin.com/in/your-profile" target="_blank" aria-label="LinkedIn Profile">
+          <i class="fab fa-linkedin social-icon linkedin"></i>
+        </a>
+        <a href="https://github.com/your-profile" target="_blank" aria-label="GitHub Profile">
+          <i class="fab fa-github social-icon github"></i>
+        </a>
+        <a href="https://twitter.com/Pratik_Cwakoti" target="_blank" aria-label="Twitter Profile">
+          <i class="fab fa-twitter social-icon twitter"></i>
+        </a>
+        <a href="https://facebook.com/Pratik.Shiwakoti.10" target="_blank" aria-label="Facebook Profile">
+          <i class="fab fa-facebook social-icon facebook"></i>
+        </a>
+        <a href="https://instagram.com/parr_tik" target="_blank" aria-label="Instagram Profile">
           <i class="fab fa-instagram social-icon instagram"></i>
         </a>
       </div>
     </div>
   </footer>
+
   <script src="script.js"></script>
 </body>
-</html>  
+</html>
