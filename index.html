@@ -6,6 +6,7 @@
   <meta name="description" content="Portfolio of a BIT student">
   <title>Pratik Shiwakoti | Portfolio</title>
   <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 <body>
@@ -20,7 +21,7 @@
           <li><a href="#contact" aria-label="Contact section">Contact</a></li>
         </ul>
       </nav>
-
+<!-- Dark Mode Toggle -->
       <div class="dark-mode-container">
         <label id="dark-mode-toggle" class="toggle-switch">
             <input type="checkbox" id="dark-mode-checkbox">
@@ -30,8 +31,7 @@
             </span>
         </label>
         <span id="mode-indicator" class="toggle-label">Dark Mode</span> <!-- Dynamic mode text -->
-    </div>
-       
+    </div> 
     </div>
   </header>
 
@@ -44,7 +44,7 @@
         <p>I am a passionate IT student specializing in web development, programming, and designing. I enjoy creating responsive, user-friendly websites and applications.</p>
       </div></div>
       <div class="about-image">
-        <img src="profile.png" alt="Profile picture of Pratik Shiwakoti" />
+        <img src="profile.png" data-src="profile.png" class="lazy" loading="lazy" alt="Profile picture of Pratik Shiwakoti" />
       </div>
     </div>
   </section>
@@ -68,7 +68,9 @@
       <h2 id="projects-title">Projects</h2>
       <div class="project-cards" role="list">
         <div class="project-card" role="listitem" aria-labelledby="hikemandu-project">
-          <h3 id="hikemandu-project">Hikemandu Website</h3>
+          <a href="https://pratik-shiwakoti.github.io/hikemandu/" target="_blank">
+            <h3 id="hikemandu-project" style="color: white;"> Hikemandu Website</h3>
+        </a>        
           <p>A website designed for trekking and hiking enthusiasts, featuring maps, itineraries, and tips for outdoor adventures.</p>
         </div>
       </div>
@@ -82,6 +84,7 @@
         <p id="testimonial-text" aria-live="polite">"Pratik is a talented developer with a keen eye for design!"</p>
         <h4 id="testimonial-author">- Suman Basnet</h4>
         <button id="next-testimonial" aria-label="Next testimonial">Next</button>
+        <button id="testimonial-control" aria-label="Pause/Play testimonials">Pause</button>
       </div>
     </div>
   </section>
@@ -89,14 +92,13 @@
   <section id="contact" class="section" aria-labelledby="contact-title">
     <div class="container">
         <h2 id="contact-title">Contact</h2>
-        
+        <div class="contact-container">
         <p>If you'd like to get in touch with me, feel free to reach out through any of the following methods:</p>
-
         <div class="contact-info">
-            <p><strong>Email:</strong> <a style="color: #94daf4;" href="mailto:pratikshiwakoti105@gmail.com">pratikshiwakoti105@gmail.com</a></p>
-            <p><strong>Phone:</strong> <a style="color: #94daf4;" href="tel:9813092717">9813092717</a></p>
+            <p><strong>Email:</strong> <a style="color: #64bede;" href="mailto:pratikshiwakoti105@gmail.com">pratikshiwakoti105@gmail.com</a></p>
+            <p><strong>Phone:</strong> <a style="color: #64c3e5;" href="tel:9813092717">9813092717</a></p>
         </div>
-
+</div>
       <div class="social-media" aria-labelledby="social-media-title">
         <p id="social-media-title">You can also connect with me on my social media:</p>
         <a href="https://facebook.com/Pratik.Shiwakoti.10" target="_blank" aria-label="Facebook Profile">
@@ -111,6 +113,45 @@
       </div>
     </div>
   </section>
+<!-- Like & Dislike Section -->
+<div class="feedback-container">
+  <button id="like-btn">👍 Like (<span id="like-count">0</span>)</button>
+  <button id="dislike-btn">👎 Dislike (<span id="dislike-count">0</span>)</button>
+</div>
+
+<!-- Feedback Form -->
+<form id="feedback-form">
+  <input type="text" id="feedback-text" placeholder="Leave your feedback here..." required>
+  <button type="submit">💬 Submit</button>
+</form>
+<!-- Popup Notification -->
+<div id="popup-message" class="popup-message"></div>
+
+<!-- Admin Dashboard (Hidden by Default) -->
+<section id="admin-dashboard" class="hidden">
+  <h2 style="color: black;">Admin Dashboard</h2>
+  <p>Total Likes: <span id="admin-like-count">0</span></p>
+  <p>Total Dislikes: <span id="admin-dislike-count">0</span></p>
+
+  <!-- Feedback List -->
+  <h3>Anonymous Feedback</h3>
+  <select id="feedback-filter">
+      <option value="all">All</option>
+      <option value="latest">Latest</option>
+      <option value="oldest">Oldest</option>
+  </select>
+  <ul id="feedback-list"></ul>
+</section>
+
+<!-- Scroll Progress Bar (Placed at the top of the page) -->
+<div id="scroll-progress-bar"></div>
+
+<!-- Scroll to Top Button -->
+<button id="scroll-to-top" aria-label="Scroll to top">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7-7-7 7"></path>
+  </svg>
+</button>
 
   <footer aria-labelledby="footer-title">
     <div class="container">
