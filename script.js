@@ -8,9 +8,13 @@ const sliderIcons = document.querySelectorAll(".slider .icon");
 if (localStorage.getItem("darkMode") === "enabled") {
     body.classList.add("dark-mode");
     darkModeToggle.checked = true;
-    modeIndicator.textContent = "Light Mode"; // Show opposite mode
+    modeIndicator.textContent = "Dark Mode"; // Corrected: Show current mode
     sliderIcons[0].style.display = "none"; // Hide sun
     sliderIcons[1].style.display = "inline"; // Show moon
+} else {
+    modeIndicator.textContent = "Light Mode"; // Corrected: Show current mode
+    sliderIcons[0].style.display = "inline"; // Show sun
+    sliderIcons[1].style.display = "none"; // Hide moon
 }
 
 // Toggle Dark Mode
@@ -18,81 +22,92 @@ darkModeToggle.addEventListener("change", function () {
     if (darkModeToggle.checked) {
         body.classList.add("dark-mode");
         localStorage.setItem("darkMode", "enabled");
-        modeIndicator.textContent = "Light Mode"; // Show opposite mode
+        modeIndicator.textContent = "Dark Mode"; // Show current mode
         sliderIcons[0].style.display = "none"; // Hide sun
         sliderIcons[1].style.display = "inline"; // Show moon
     } else {
         body.classList.remove("dark-mode");
         localStorage.setItem("darkMode", "disabled");
-        modeIndicator.textContent = "Dark Mode"; // Show opposite mode
+        modeIndicator.textContent = "Light Mode"; // Show current mode
         sliderIcons[0].style.display = "inline"; // Show sun
         sliderIcons[1].style.display = "none"; // Hide moon
     }
 });
 
-// Testimonials Array
+// Testimonials Array with star ratings
 const testimonials = [
-    { text: "Pratik is a talented developer with a keen eye for design!", author: "Suman Basnet" },
-    { text: "His work is always top-notch and delivered on time.", author: "Alisha Rai" },
-    { text: "Great experience working with Pratik!", author: "Ramesh Karki" }
-  ];
-  
-  // Get Elements
-  let currentTestimonial = 0;
-  const testimonialText = document.getElementById("testimonial-text");
-  const testimonialAuthor = document.getElementById("testimonial-author");
-  const nextTestimonialBtn = document.getElementById("next-testimonial");
-  const controlButton = document.getElementById("testimonial-control");
-  
-  let autoScrollInterval;
-  let isAutoScrolling = true;
-  
-  // Function to show next testimonial
-  function showNextTestimonial() {
-      nextTestimonialBtn.disabled = true; // Disable button to prevent spam clicks
-      testimonialText.style.opacity = 0; // Fade out effect
-      
-      setTimeout(() => {
-          currentTestimonial = (currentTestimonial + 1) % testimonials.length;
-          testimonialText.textContent = `"${testimonials[currentTestimonial].text}"`;
-          testimonialAuthor.textContent = `- ${testimonials[currentTestimonial].author}`;
-          testimonialText.style.opacity = 1; // Fade in effect
-          nextTestimonialBtn.disabled = false; // Re-enable button
-      }, 300); // Delay to match fade animation
+  { text: "Pratik is a talented developer with a keen eye for design!", author: "Suman Basnet", stars: 5 },
+  { text: "His work is always top-notch and delivered on time.", author: "Alisha Rai", stars: 4 },
+  { text: "Great experience working with Pratik!", author: "Ramesh Karki", stars: 5 }
+];
+
+// Get Elements
+let currentTestimonial = 0;
+const testimonialText = document.getElementById("testimonial-text");
+const testimonialAuthor = document.getElementById("testimonial-author");
+const testimonialStars = document.getElementById("testimonial-stars"); // ⭐ Add this in HTML
+const nextTestimonialBtn = document.getElementById("next-testimonial");
+const controlButton = document.getElementById("testimonial-control");
+
+let autoScrollInterval;
+let isAutoScrolling = true;
+
+// Function to show next testimonial
+function showNextTestimonial() {
+  nextTestimonialBtn.disabled = true; // Disable button to prevent spam clicks
+  testimonialText.style.opacity = 0; // Fade out effect
+  testimonialAuthor.style.opacity = 0;
+  testimonialStars.style.opacity = 0;
+
+  setTimeout(() => {
+    currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+    const current = testimonials[currentTestimonial];
+
+    testimonialText.textContent = `"${current.text}"`;
+    testimonialAuthor.textContent = `- ${current.author}`;
+    testimonialStars.innerHTML = "⭐".repeat(current.stars);
+
+    testimonialText.style.opacity = 1; // Fade in
+    testimonialAuthor.style.opacity = 1;
+    testimonialStars.style.opacity = 1;
+
+    nextTestimonialBtn.disabled = false;
+  }, 300); // Delay to match fade
+}
+
+// Start auto-scrolling every 5 seconds
+function startAutoScrolling() {
+  autoScrollInterval = setInterval(showNextTestimonial, 5000);
+}
+
+// Stop auto-scrolling
+function stopAutoScrolling() {
+  clearInterval(autoScrollInterval);
+}
+
+// Toggle pause/play functionality
+controlButton.addEventListener("click", () => {
+  if (isAutoScrolling) {
+    stopAutoScrolling();
+    controlButton.textContent = "Play";
+  } else {
+    startAutoScrolling();
+    controlButton.textContent = "Pause";
   }
-  
-  // Start auto-scrolling every 5 seconds
-  function startAutoScrolling() {
-      autoScrollInterval = setInterval(showNextTestimonial, 5000);
-  }
-  
-  // Stop auto-scrolling
-  function stopAutoScrolling() {
-      clearInterval(autoScrollInterval);
-  }
-  
-  // Toggle pause/play functionality
-  controlButton.addEventListener("click", () => {
-      if (isAutoScrolling) {
-          stopAutoScrolling();
-          controlButton.textContent = "Play";
-      } else {
-          startAutoScrolling();
-          controlButton.textContent = "Pause";
-      }
-      isAutoScrolling = !isAutoScrolling;
-  });
-  
-  // Handle the next testimonial click
-  nextTestimonialBtn.addEventListener("click", showNextTestimonial);
-  
-  // Start auto-scrolling on page load
-  startAutoScrolling();
-  
-  // Initially show the first testimonial
-  testimonialText.textContent = `"${testimonials[currentTestimonial].text}"`;
-  testimonialAuthor.textContent = `- ${testimonials[currentTestimonial].author}`;
-  
+  isAutoScrolling = !isAutoScrolling;
+});
+
+// Handle the next testimonial click
+nextTestimonialBtn.addEventListener("click", showNextTestimonial);
+
+// Start auto-scrolling on page load
+startAutoScrolling();
+
+// Initially show the first testimonial
+testimonialText.textContent = `"${testimonials[currentTestimonial].text}"`;
+testimonialAuthor.textContent = `- ${testimonials[currentTestimonial].author}`;
+testimonialStars.innerHTML = "⭐".repeat(testimonials[currentTestimonial].stars);
+
 // Select elements
 const likeBtn = document.getElementById("like-btn");
 const dislikeBtn = document.getElementById("dislike-btn");
@@ -287,3 +302,28 @@ scrollToTopButton.addEventListener('click', () => {
         behavior: 'smooth' // Smooth scroll to the top
     });
 });
+function setGreeting() {
+    const greetingElement = document.getElementById('greeting');
+    const now = new Date();
+    const hour = now.getHours();
+  
+    let greeting = "Namaskar 🙏";
+    let timeGreeting = "";
+  
+    if (hour >= 5 && hour < 12) {
+      timeGreeting = "Good Morning!";
+    } else if (hour >= 12 && hour < 17) {
+      timeGreeting = "Good Afternoon!";
+    } else if (hour >= 17 && hour < 21) {
+      timeGreeting = "Good Evening!";
+    } else {
+      timeGreeting = "Have a Peaceful Night!";
+    }
+  
+    greetingElement.textContent = `${greeting}\n${timeGreeting}`;
+  }
+  
+  setGreeting();    // Call the function to set the greeting on page load  
+
+
+  
