@@ -2062,6 +2062,13 @@ Testimonials Section */
     .chat-send:hover {
       background-color: var(--primary-dark);
     }
+    .chat-message .timestamp {
+  display: block;
+  font-size: 0.75rem;
+  color: #e1d949;
+  margin-top: 4px;
+  text-align: right;
+}
 
     /* Footer */
     footer {
@@ -3135,9 +3142,7 @@ const projects = [
               </div>
             </label>
           </div>
-          <button class="language-toggle" id="language-toggle">
-            <i class="fas fa-globe"></i> EN / NP
-          </button>
+          
           <a href="resume.pdf" download class="resume-btn-header">
             <i class="fas fa-file-download"></i> Resume
           </a>
@@ -3319,42 +3324,6 @@ const projects = [
             </div>
             <div class="progress-bar">
               <div class="progress-value" style="width: 85%;"></div>
-            </div>
-          </div>
-        </div>
-        <div class="skill-card neumorphic">
-          <div class="skill-icon">
-            <i class="fab fa-react" style="color: #61DAFB;"></i>
-          </div>
-          <h3 class="skill-title">React</h3>
-          <p class="skill-description">
-            Building modern, component-based user interfaces with React and related libraries.
-          </p>
-          <div class="skill-progress">
-            <div class="progress-label">
-              <span>Proficiency</span>
-              <span>80%</span>
-            </div>
-            <div class="progress-bar">
-              <div class="progress-value" style="width: 80%;"></div>
-            </div>
-          </div>
-        </div>
-        <div class="skill-card neumorphic">
-          <div class="skill-icon">
-            <i class="fab fa-node-js" style="color: #339933;"></i>
-          </div>
-          <h3 class="skill-title">Node.js</h3>
-          <p class="skill-description">
-            Creating server-side applications and APIs using Node.js and Express.
-          </p>
-          <div class="skill-progress">
-            <div class="progress-label">
-              <span>Proficiency</span>
-              <span>75%</span>
-            </div>
-            <div class="progress-bar">
-              <div class="progress-value" style="width: 75%;"></div>
             </div>
           </div>
         </div>
@@ -3724,6 +3693,7 @@ const projects = [
           </div>
           
           <form id="contact-form">
+            <!-- Step 1 -->
             <div class="form-step active" id="step-1">
               <h3>Basic Information</h3>
               <div class="form-group">
@@ -3735,11 +3705,12 @@ const projects = [
                 <input type="email" id="email" class="form-control" required>
               </div>
               <div class="form-navigation">
-                <div></div> <!-- Empty div for spacing -->
-                <button type="button" class="btn-next" id="to-step-2">Next <i class="fas fa-arrow-right"></i></button>
+                <div></div> <!-- Spacer -->
+                <button type="button" class="btn-next" id="btn-next-step-1">Next <i class="fas fa-arrow-right"></i></button>
               </div>
             </div>
-            
+          
+            <!-- Step 2 -->
             <div class="form-step" id="step-2">
               <h3>Project Details</h3>
               <div class="form-group">
@@ -3757,11 +3728,12 @@ const projects = [
                 </select>
               </div>
               <div class="form-navigation">
-                <button type="button" class="btn-prev" id="to-step-1"><i class="fas fa-arrow-left"></i> Previous</button>
-                <button type="button" class="btn-next" id="to-step-3">Next <i class="fas fa-arrow-right"></i></button>
+                <button type="button" class="btn-prev" id="btn-prev-step-2"><i class="fas fa-arrow-left"></i> Previous</button>
+                <button type="button" class="btn-next" id="btn-next-step-2">Next <i class="fas fa-arrow-right"></i></button>
               </div>
             </div>
-            
+          
+            <!-- Step 3 -->
             <div class="form-step" id="step-3">
               <h3>Your Message</h3>
               <div class="form-group">
@@ -3769,13 +3741,14 @@ const projects = [
                 <textarea id="message" class="form-control" required></textarea>
               </div>
               <div class="form-navigation">
-                <button type="button" class="btn-prev" id="to-step-2"><i class="fas fa-arrow-left"></i> Previous</button>
+                <button type="button" class="btn-prev" id="btn-prev-step-3"><i class="fas fa-arrow-left"></i> Previous</button>
                 <button type="submit" class="btn-submit">
                   <i class="fas fa-paper-plane"></i> Send Message
                 </button>
               </div>
             </div>
           </form>
+          
         </div>
       </div>
     </div>
@@ -4047,6 +4020,7 @@ const projects = [
       </div>
     </div>
   </div>
+  <audio id="chat-sound" src="https://assets.mixkit.co/sfx/download/mixkit-message-pop-alert-2354.mp3" preload="auto"></audio>
 
   <script>
     // Preloader
@@ -4089,154 +4063,7 @@ const projects = [
     themeToggle.addEventListener('change', toggleDarkMode);
     mobileThemeToggle.addEventListener('change', toggleDarkMode);
 
-    // Language Toggle
-    const languageToggle = document.getElementById('language-toggle');
-    const mobileLanguageToggle = document.getElementById('mobile-language-toggle');
-    let isNepali = localStorage.getItem('language') === 'np';
-
-    // Translation object
-    const translations = {
-  en: {
-    aboutTitle: "About Me",
-    aboutDescription1: "Welcome to my portfolio! My name is Pratik Shiwakoti, and I am a BIT Second Year student currently studying in Bhaktapur Multiple Campus.",
-    aboutDescription2: "I am a passionate IT student specializing in web development, programming, and designing. With a strong foundation in both front-end and back-end technologies, I strive to create elegant, efficient, and user-friendly digital experiences.",
-    skillsTitle: "Skills",
-    skillsDescription: "These are the technologies and tools I am proficient in",
-    projectsTitle: "Projects",
-    hikemanduProject: "Hikemandu Website",
-    hikemanduDescription: "A website designed for trekking and hiking enthusiasts, featuring maps, itineraries, and tips for outdoor adventures.",
-    contactTitle: "Contact",
-    contactDescription: "Get in touch with me",
-    testimonialTitle: "Testimonials",
-    testimonialDescription: "What people say about my work",
-    faqTitle: "FAQ",
-    faqDescription: "Answers to common questions about my services",
-    analyticsTitle: "Analytics Dashboard",
-    analyticsDescription: "Track visitor statistics and performance metrics",
-    heroDescription: "A passionate BIT student specializing in web development, programming, and UI/UX design. Currently studying at Bhaktapur Multiple Campus.",
-    footerTitle: "© 2025 Pratik Shiwakoti. All rights reserved.",
-    greetingText: "Hello! 👋",
-    contactMe: "Contact Me",
-    downloadResume: "Download Resume",
-    projectsCompleted: "Projects Completed",
-    happyClients: "Happy Clients",
-    hoursOfCoding: "Hours of Coding",
-    viewProject: "View Project",
-    sourceCode: "Source Code",
-    sendMessage: "Send Message",
-    name: "Name",
-    email: "Email",
-    message: "Message",
-    subject: "Subject",
-    projectType: "Project Type",
-    next: "Next",
-    previous: "Previous",
-    submit: "Submit"
-  },
-  np: {
-    aboutTitle: "मेरो बारेमा",
-    aboutDescription1: "मेरो पोर्टफोलियोमा स्वागत छ! मेरो नाम प्रतीक शिवाकोटी हो, र म भक्तपुर बहुमुखी क्याम्पसमा BIT दोस्रो वर्षमा अध्ययनरत छु ।",
-    aboutDescription2: "म एक उत्साही आईटी विद्यार्थी हुँ जसले वेव विकास, प्रोग्रामिङ, र डिजाइनिङमा विशेषज्ञता हासिल गरेको छु। फ्रन्ट-एन्ड र ब्याक-एन्ड प्रविधिहरूमा बलियो आधार भएकोले, म सुन्दर, कुशल र प्रयोगकर्ता-मैत्री डिजिटल अनुभवहरू सिर्जना गर्न प्रयास गर्दछु।",
-    skillsTitle: "सीपहरू",
-    skillsDescription: "यी सबै प्रविधिहरू र उपकरणहरू छन् जसमा म निपूर्ण छु",
-    projectsTitle: "परियोजनाहरू",
-    hikemanduProject: "हाईकमाण्डु वेबसाइट",
-    hikemanduDescription: "यो वेबसाइट ट्रेकिंग र हाइकिंग प्रेमीहरूका लागि डिजाइन गरिएको हो, जसमा नक्सा, यात्रा योजनाहरू, र सुझावहरू समावेश छन्।",
-    contactTitle: "सम्पर्क",
-    contactDescription: "मसँग सम्पर्क गर्नुहोस्",
-    testimonialTitle: "प्रशंसा",
-    testimonialDescription: "मेरो कामको बारेमा मानिसहरूले के भन्छन्",
-    faqTitle: "प्रायः सोधिने प्रश्नहरू",
-    faqDescription: "मेरो सेवाहरूको बारेमा सामान्य प्रश्नहरूको उत्तर",
-    analyticsTitle: "विश्लेषण ड्यासबोर्ड",
-    analyticsDescription: "आगन्तुक तथ्याङ्क र प्रदर्शन मेट्रिक्स ट्र्याक गर्नुहोस्",
-    heroDescription: "वेब विकास, प्रोग्रामिङ, र UI/UX डिजाइनमा विशेषज्ञता प्राप्त एक उत्साही BIT विद्यार्थी। हाल भक्तपुर बहुमुखी क्याम्पसमा अध्ययनरत।",
-    footerTitle: "© २०२५ प्रतीक शिवाकोटी। सर्वाधिकार सुरक्षित।",
-    greetingText: "नमस्कार 🙏",
-    contactMe: "सम्पर्क गर्नुहोस्",
-    downloadResume: "रेजुमे डाउनलोड गर्नुहोस्",
-    projectsCompleted: "पूरा गरिएका परियोजनाहरू",
-    happyClients: "खुशी ग्राहकहरू",
-    hoursOfCoding: "कोडिङ घण्टाहरू",
-    viewProject: "परियोजना हेर्नुहोस्",
-    sourceCode: "स्रोत कोड",
-    sendMessage: "सन्देश पठाउनुहोस्",
-    name: "नाम",
-    email: "इमेल",
-    message: "सन्देश",
-    subject: "विषय",
-    projectType: "परियोजना प्रकार",
-    next: "अर्को",
-    previous: "पछिल्लो",
-    submit: "पेश गर्नुहोस्"
-  }
-};
-
-    // Check saved preference
-    if (isNepali) {
-      changeLanguage('np');
-      languageToggle.innerHTML = '<i class="fas fa-globe"></i> NP / EN';
-      mobileLanguageToggle.innerHTML = '<i class="fas fa-globe"></i> NP / EN';
-    }
-
-    // Language toggle functionality
-    function toggleLanguage() {
-      isNepali = !isNepali;
-      const lang = isNepali ? 'np' : 'en';
-      
-      changeLanguage(lang);
-      languageToggle.innerHTML = isNepali ? '<i class="fas fa-globe"></i> NP / EN' : '<i class="fas fa-globe"></i> EN / NP';
-      mobileLanguageToggle.innerHTML = isNepali ? '<i class="fas fa-globe"></i> NP / EN' : '<i class="fas fa-globe"></i> EN / NP';
-      
-      localStorage.setItem('language', lang);
-
-      // Show language change notification
-      showPopup(isNepali ? 'भाषा परिवर्तन गरियो' : 'Language changed');
-    }
-
-    languageToggle.addEventListener('click', toggleLanguage);
-    mobileLanguageToggle.addEventListener('click', toggleLanguage);
-
-    function changeLanguage(lang) {
-      // Get all elements that need translation
-      const elements = document.querySelectorAll('[data-translate]');
-      
-      // Update content based on selected language
-      elements.forEach(element => {
-        const key = element.getAttribute('data-translate');
-        if (translations[lang][key]) {
-          element.textContent = translations[lang][key];
-        }
-      });
-
-      // Update specific elements
-  document.querySelector('.section-title[data-translate="aboutTitle"]').textContent = translations[lang].aboutTitle;
-  document.querySelector('.section-title[data-translate="skillsTitle"]').textContent = translations[lang].skillsTitle;
-  document.querySelector('.section-title[data-translate="projectsTitle"]').textContent = translations[lang].projectsTitle;
-  document.querySelector('.section-title[data-translate="testimonialTitle"]').textContent = translations[lang].testimonialTitle;
-  document.querySelector('.section-title[data-translate="contactTitle"]').textContent = translations[lang].contactTitle;
-  document.querySelector('.section-title[data-translate="faqTitle"]').textContent = translations[lang].faqTitle;
-  document.querySelector('.section-title[data-translate="analyticsTitle"]').textContent = translations[lang].analyticsTitle;
-  
-  document.getElementById('greeting-text').textContent = translations[lang].greetingText;
-  
-  
-  // Update buttons
-  document.querySelector('.btn-primary').textContent = translations[lang].contactMe;
-  document.querySelector('.resume-btn').textContent = translations[lang].downloadResume;
-  
-  // Update form labels
-  document.querySelectorAll('.form-label')[0].textContent = translations[lang].name;
-  document.querySelectorAll('.form-label')[1].textContent = translations[lang].email;
-  document.querySelectorAll('.form-label')[2].textContent = translations[lang].subject;
-  document.querySelectorAll('.form-label')[3].textContent = translations[lang].message;
-  
-  // Update form buttons
-  document.querySelector('.btn-next').textContent = translations[lang].next;
-  document.querySelector('.btn-prev').textContent = translations[lang].previous;
-  document.querySelector('.btn-submit').textContent = translations[lang].submit;
-
-    }
+    
 
     // Mobile Menu
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
@@ -4389,98 +4216,138 @@ const projects = [
       });
     });
 
-    // Multi-step Contact Form
+    // Contact Form Steps
     const contactForm = document.getElementById('contact-form');
-    const formSteps = document.querySelectorAll('.form-step');
-    const progressSteps = document.querySelectorAll('.progress-step');
-    
-    // Next buttons
-    document.getElementById('to-step-2').addEventListener('click', () => {
-      // Validate step 1
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-      
-      if (name && email) {
-        formSteps[0].classList.remove('active');
-        formSteps[1].classList.add('active');
-        progressSteps[0].classList.remove('active');
-        progressSteps[0].classList.add('completed');
-        progressSteps[1].classList.add('active');
+const formSteps = document.querySelectorAll('.form-step');
+const progressSteps = document.querySelectorAll('.progress-step');
+
+// Navigation Buttons
+const btnNextStep1 = document.getElementById('btn-next-step-1');
+const btnNextStep2 = document.getElementById('btn-next-step-2');
+const btnPrevStep2 = document.getElementById('btn-prev-step-2');
+const btnPrevStep3 = document.getElementById('btn-prev-step-3');
+
+
+// Step 1 ➜ 2
+btnNextStep1.addEventListener('click', () => {
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+
+  if (!name || !email) {
+  return showPopup('❗ Please fill in all required fields.');
+}
+
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+if (!emailRegex.test(email)) {
+  return showPopup('❗ Please enter a valid email address.');
+}
+
+goToStep(1);
+
+});
+
+// Step 2 ➜ 3
+btnNextStep2.addEventListener('click', () => {
+  const subject = document.getElementById('subject').value.trim();
+
+  if (subject) {
+    goToStep(2);
+  } else {
+    showPopup('❗ Please fill in all required fields.');
+  }
+});
+
+// Step 2 ⬅ Back from Step 3
+btnPrevStep3.addEventListener('click', () => {
+  goToStep(1, true);
+});
+
+// Step 1 ⬅ Back from Step 2
+btnPrevStep2.addEventListener('click', () => {
+  goToStep(0, true);
+});
+
+// Form Submit
+contactForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const subject = document.getElementById('subject').value.trim();
+  const projectType = document.getElementById('project-type').value;
+  const message = document.getElementById('message').value.trim();
+
+  if (name && email && subject && message) {
+    const formData = {
+      name,
+      email,
+      subject,
+      projectType,
+      message
+    };
+
+    // Show loading indicator
+    showPopup('⏳ Sending your message...');
+
+    fetch('https://script.google.com/macros/s/AKfycbxdmlhDdG5kUuZTxNzTyfEWdsSSNWBMNxqDktYlzv3YFF2EWr2u9qnG3iTZlLt7qSGztg/exec', {
+  method: 'POST',
+  mode: 'cors',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(formData)
+})
+    .then(res => res.json())
+    .then(data => {
+      if (data.status === "success") { // Changed from data.success
+        showPopup('✅ Message sent successfully! I will get back to you soon.');
+        contactForm.reset();
+        goToStep(0, true, true);
       } else {
-        showPopup('Please fill in all required fields');
+        showPopup(`❌ ${data.message || 'Something went wrong. Please try again.'}`);
       }
-    });
-    
-    document.getElementById('to-step-3').addEventListener('click', () => {
-      // Validate step 2
-      const subject = document.getElementById('subject').value;
-      
-      if (subject) {
-        formSteps[1].classList.remove('active');
-        formSteps[2].classList.add('active');
-        progressSteps[1].classList.remove('active');
-        progressSteps[1].classList.add('completed');
-        progressSteps[2].classList.add('active');
-      } else {
-        showPopup('Please fill in all required fields');
-      }
-    });
-    
-    // Previous buttons
-    document.getElementById('to-step-1').addEventListener('click', () => {
-      formSteps[1].classList.remove('active');
-      formSteps[0].classList.add('active');
-      progressSteps[1].classList.remove('active');
-      progressSteps[0].classList.remove('completed');
-      progressSteps[0].classList.add('active');
-    });
-    
-    document.getElementById('to-step-2').addEventListener('click', () => {
-      formSteps[2].classList.remove('active');
-      formSteps[1].classList.add('active');
-      progressSteps[2].classList.remove('active');
-      progressSteps[1].classList.remove('completed');
-      progressSteps[1].classList.add('active');
-    });
-    
-    // Form submission
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      
-      // Get form values
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-      const subject = document.getElementById('subject').value;
-      const projectType = document.getElementById('project-type').value;
-      const message = document.getElementById('message').value;
-      
-      // In a real application, you would send this data to a server
-      // For now, we'll just show a success message
-      
-      // Show confirmation message
-      showPopup('✅ Message sent successfully! I will get back to you soon.');
-      
-      // Reset form and go back to step 1
-      contactForm.reset();
-      formSteps.forEach(step => step.classList.remove('active'));
-      formSteps[0].classList.add('active');
-      progressSteps.forEach(step => {
-        step.classList.remove('active');
-        step.classList.remove('completed');
-      });
-      progressSteps[0].classList.add('active');
+    })
+    .catch(err => {
+      console.error(err);
+      showPopup('⚠️ Failed to connect. Check your internet or try again later.');
     });
 
-    // Function to show popup message
-    function showPopup(message) {
-      const popupMessage = document.getElementById('popup-message');
-      popupMessage.textContent = message;
-      popupMessage.classList.add('visible');
-      
-      setTimeout(() => {
-        popupMessage.classList.remove('visible');
-      }, 3000);
+  } else {
+    showPopup('❗ Please fill in all required fields.');
+  }
+});
+
+// Step Nation Handler
+function goToStep(stepIndex, isBack = false, reset = false) {
+  formSteps.forEach(step => step.classList.remove('active'));
+  formSteps[stepIndex].classList.add('active');
+
+  progressSteps.forEach((step, index) => {
+    step.classList.remove('active');
+    step.classList.remove('completed');
+
+    if (index < stepIndex) {
+      step.classList.add('completed');
+    } else if (index === stepIndex) {
+      step.classList.add('active');
     }
+  });
+
+  if (reset) {
+    progressSteps[0].classList.add('active');
+  }
+}
+
+// Show Message Popup
+function showPopup(message) {
+  const popupMessage = document.getElementById('popup-message');
+  popupMessage.textContent = message;
+  popupMessage.classList.add('visible');
+
+  setTimeout(() => {
+    popupMessage.classList.remove('visible');
+  }, 3000);
+}
 
     // Subtitle Animation
     const subtitles = [
@@ -4555,79 +4422,149 @@ const projects = [
         observer.observe(bar);
       });
     }
+// chat widget
+  const chatButton = document.getElementById('chat-button');
+  const chatContainer = document.getElementById('chat-container');
+  const chatClose = document.getElementById('chat-close');
+  const chatInput = document.getElementById('chat-input');
+  const chatSend = document.getElementById('chat-send');
+  const chatMessages = document.getElementById('chat-messages');
+  const chatSound = document.getElementById('chat-sound');
 
-    // Live Chat Widget
-    const chatButton = document.getElementById('chat-button');
-    const chatContainer = document.getElementById('chat-container');
-    const chatClose = document.getElementById('chat-close');
-    const chatInput = document.getElementById('chat-input');
-    const chatSend = document.getElementById('chat-send');
-    const chatMessages = document.getElementById('chat-messages');
+  // Toggle chat
+  chatButton.addEventListener('click', () => {
+    chatContainer.classList.toggle('active');
+  });
 
-    chatButton.addEventListener('click', () => {
-      chatContainer.classList.toggle('active');
-    });
+  chatClose.addEventListener('click', () => {
+    chatContainer.classList.remove('active');
+  });
 
-    chatClose.addEventListener('click', () => {
+  // Fancy timestamp
+  function getCurrentTime() {
+    const now = new Date();
+    const options = {
+      hour: '2-digit',
+      minute: '2-digit',
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric'
+    };
+    return now.toLocaleString(undefined, options);
+  }
+
+  // Scroll to bottom
+  function scrollToBottom() {
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  // Send message
+  function sendMessage() {
+    const message = chatInput.value.trim();
+    if (!message) return;
+
+    const timestamp = getCurrentTime();
+
+    const userMessageElement = document.createElement('div');
+    userMessageElement.className = 'chat-message user';
+    userMessageElement.innerHTML = `<span>${message}</span><span class="timestamp">${timestamp}</span>`;
+    chatMessages.appendChild(userMessageElement);
+    chatInput.value = '';
+    scrollToBottom();
+    saveChat();
+
+    setTimeout(() => {
+      const botResponse = getBotResponse(message);
+      const botMessageElement = document.createElement('div');
+      botMessageElement.className = 'chat-message bot';
+      botMessageElement.innerHTML = `<span>${botResponse}</span><span class="timestamp">${getCurrentTime()}</span>`;
+      chatMessages.appendChild(botMessageElement);
+      scrollToBottom();
+      saveChat();
+      chatSound.play();
+    }, 1000);
+  }
+
+  chatSend.addEventListener('click', sendMessage);
+  chatInput.addEventListener('keypress', e => {
+    if (e.key === "Enter") sendMessage();
+  });
+
+  // Save chat
+  function saveChat() {
+    const data = {
+      html: chatMessages.innerHTML,
+      timestamp: Date.now()
+    };
+    localStorage.setItem("chatMessages", JSON.stringify(data));
+  }
+
+  // Load chat
+  function loadChat() {
+  const saved = JSON.parse(localStorage.getItem("chatMessages"));
+  if (saved) {
+    const age = Date.now() - saved.timestamp;
+    const oneWeek = 7 * 24 * 60 * 60 * 1000;
+    if (age > oneWeek) {
+      localStorage.removeItem("chatMessages"); // Auto-clear after 7 days
+    } else {
+      chatMessages.innerHTML = saved.html;
+      scrollToBottom();
+    }
+  }
+}
+
+
+  window.addEventListener("load", loadChat);
+
+  // Close chat when clicking outside
+  document.addEventListener('click', (event) => {
+    const isClickInsideChat = chatContainer.contains(event.target);
+    const isClickOnButton = chatButton.contains(event.target);
+    if (!isClickInsideChat && !isClickOnButton) {
       chatContainer.classList.remove('active');
-    });
-
-    function sendMessage() {
-      const message = chatInput.value.trim();
-      
-      if (message) {
-        // Add user message
-        const userMessageElement = document.createElement('div');
-        userMessageElement.className = 'chat-message user';
-        userMessageElement.textContent = message;
-        chatMessages.appendChild(userMessageElement);
-        
-        // Clear input
-        chatInput.value = '';
-        
-        // Scroll to bottom
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-        
-        // Simulate bot response after a delay
-        setTimeout(() => {
-          const botMessageElement = document.createElement('div');
-          botMessageElement.className = 'chat-message bot';
-          botMessageElement.textContent = getBotResponse(message);
-          chatMessages.appendChild(botMessageElement);
-          
-          // Scroll to bottom
-          chatMessages.scrollTop = chatMessages.scrollHeight;
-        }, 1000);
-      }
     }
+  });
 
-    chatSend.addEventListener('click', sendMessage);
-    
-    chatInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        sendMessage();
-      }
-    });
+  // Bot reply logic
+  function getBotResponse(message) {
+    message = typeof message === 'string' ? message.toLowerCase() : '';
 
-    function getBotResponse(message) {
-      message = message.toLowerCase();
-      
-      if (message.includes('hello') || message.includes('hi') || message.includes('hey')) {
-        return "Hello! How can I help you today?";
-      } else if (message.includes('contact') || message.includes('hire') || message.includes('work')) {
-        return "You can contact Pratik directly at pratikshiwakoti105@gmail.com or fill out the contact form on this page.";
-      } else if (message.includes('project') || message.includes('portfolio')) {
-        return "Pratik has worked on several projects including websites and web applications. You can check them out in the Projects section.";
-      } else if (message.includes('skill') || message.includes('technology')) {
-        return "Pratik is skilled in HTML, CSS, JavaScript, React, Node.js, and more. Check out the Skills section for details.";
-      } else if (message.includes('experience') || message.includes('work history')) {
-        return "Pratik has experience as a freelance web developer and has completed an internship. See the Experience section for more information.";
-      } else if (message.includes('thank')) {
-        return "You're welcome! Feel free to ask if you have any other questions.";
-      } else {
-        return "I'll pass your message to Pratik. In the meantime, feel free to explore the portfolio or send an email directly.";
-      }
-    }
+    if (!message) return "Oops, I didn’t catch that. Can you try typing again? 😊";
+
+    if (/\b(hello|hi|hey|namaste|yo|hola|wassup|sup)\b/.test(message))
+      return "Hey there! 👋 I'm here to help. Ask me anything about Pratik!";
+
+    if (/\b(contact|email|hire|reach|connect|get in touch|freelance|collaborate)\b/.test(message))
+      return "📬 You can reach Pratik at pratikshiwakoti105@gmail.com or through the contact form on this site!";
+
+    if (/\b(project|portfolio|work|website|demo|showcase|creation|build)\b/.test(message))
+      return "Pratik has built some amazing stuff! 💻 Check out the Projects section to explore.";
+
+    if (/\b(skill|technology|tech|tools|stack|framework|language|coding|programming)\b/.test(message))
+      return "🛠️ Pratik is skilled in HTML, CSS, JavaScript, React, Node.js, and more! Head over to the Skills section for the full list.";
+
+    if (/\b(education|study|school|college|degree|university|bit|campus)\b/.test(message))
+      return "🎓 Pratik is studying BIT at Bhaktapur Multiple Campus. Smart choice, right?";
+
+    if (/\b(experience|internship|job|career|work history|background|employment)\b/.test(message))
+      return "📁 Pratik has worked as a freelance developer and completed an internship. Check the Experience section for details!";
+
+    if (/\b(hobby|interest|free time|fun|passion|trek|hikemandu|travel)\b/.test(message))
+      return "🌄 Pratik loves hiking and adventure, and even runs a site called Hikemandu. Nature + tech = win!";
+
+    if (/\b(thank|thanks|thank you|appreciate|grateful)\b/.test(message))
+      return "You're very welcome! 😊 I'm always here to help.";
+
+    if (/\b(bye|goodbye|see you|later|take care)\b/.test(message))
+      return "Bye for now! 👋 Come back anytime you need help.";
+
+    if (/\b(joke|funny|laugh|bored|tell me something)\b/.test(message))
+      return "😄 Why did the JavaScript developer wear glasses? Because they couldn't C#!";
+
+    return "Hmm, I'm not sure how to respond to that 🤔. You can ask me about Pratik’s skills, projects, contact info, education, or hobbies!";
+  }
+
 
     // Keyboard Navigation
     const keyboardNavIndicator = document.getElementById('keyboard-nav-indicator');
@@ -5077,7 +5014,32 @@ document.addEventListener('DOMContentLoaded', function() {
     return null;
   }
 });
+  // Set your offer deadline (e.g., 7 days from now)
+  const offerDeadline = new Date(Date.now() + 100 * 24 * 60 * 60 * 1000);
 
+  function updateCountdown() {
+    const now = new Date();
+    const diff = offerDeadline - now;
+
+    if (diff <= 0) {
+      document.querySelector('.countdown-display').textContent = '00:00:00:00';
+      clearInterval(timerInterval);
+      return;
+    }
+
+    const days = String(Math.floor(diff / (1000 * 60 * 60 * 24))).padStart(2, '0');
+    const hours = String(Math.floor((diff / (1000 * 60 * 60)) % 24)).padStart(2, '0');
+    const minutes = String(Math.floor((diff / (1000 * 60)) % 60)).padStart(2, '0');
+    const seconds = String(Math.floor((diff / 1000) % 60)).padStart(2, '0');
+
+    document.getElementById("countdown-days").textContent = days;
+    document.getElementById("countdown-hours").textContent = hours;
+    document.getElementById("countdown-minutes").textContent = minutes;
+    document.getElementById("countdown-seconds").textContent = seconds;
+  }
+
+  const timerInterval = setInterval(updateCountdown, 1000);
+  updateCountdown(); // Initial call
 
 
 
