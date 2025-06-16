@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <!-- Favicons -->
+  <link rel="icon" href="/favicon.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
@@ -5817,39 +5818,59 @@ if (!offerDeadline) {
   });
   </script>
   <script>
-  // 1. Disable right-click
-  document.addEventListener('contextmenu', e => e.preventDefault());
+  // Disable right-click
+  document.addEventListener("contextmenu", e => e.preventDefault());
 
-  // 2. Block DevTools shortcut keys
-  document.onkeydown = function (e) {
-    if (
-      e.key === 'F12' ||
-      (e.ctrlKey && e.shiftKey && e.key === 'I') ||
-      (e.ctrlKey && e.shiftKey && e.key === 'J') ||
-      (e.ctrlKey && e.key === 'U')
-    ) {
-      e.preventDefault();
-      return false;
+  let isAdmin = false;
+
+  function enableAdminMode() {
+    isAdmin = true;
+    console.clear();
+    console.log("🔓 DevTools protection disabled.");
+    alert("You can now open Developer Tools.");
+    document.onkeydown = null; // remove blocking
+  }
+
+  // Allow Ctrl + M to activate admin mode
+  document.addEventListener("keydown", function (e) {
+    if (e.ctrlKey && e.key.toLowerCase() === "m") {
+      enableAdminMode();
+      return;
     }
-  };
 
-  // 3. Detect DevTools open by screen dimension difference
+    // Block DevTools shortcuts if not admin
+    if (!isAdmin) {
+      if (
+        e.key === "F12" ||
+        (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "i") ||
+        (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "j") ||
+        (e.ctrlKey && e.key.toLowerCase() === "u")
+      ) {
+        e.preventDefault();
+        return false;
+      }
+    }
+  });
+
+  // DevTools open detection (only if not admin)
   let devtoolsOpen = false;
 
   setInterval(function () {
     const widthThreshold = window.outerWidth - window.innerWidth > 160;
     const heightThreshold = window.outerHeight - window.innerHeight > 160;
-    if (widthThreshold || heightThreshold) {
+
+    if ((widthThreshold || heightThreshold) && !isAdmin) {
       if (!devtoolsOpen) {
         devtoolsOpen = true;
-        alert("DevTools is open. Redirecting...");
-        location.href = "https://www.google.com"; // Or reload the page
+        alert("🚫 DevTools is open. Redirecting...");
+        window.location.href = "https://www.google.com";
       }
     } else {
       devtoolsOpen = false;
     }
   }, 1000);
 </script>
+
 
   <script src="animation.js"></script>
 </body>
