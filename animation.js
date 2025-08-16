@@ -22,6 +22,7 @@ function initScrollAnimations() {
   document.querySelectorAll(".timeline-item:nth-child(odd)").forEach((el) => el.classList.add("fade-in-left"))
   document.querySelectorAll(".timeline-item:nth-child(even)").forEach((el) => el.classList.add("fade-in-right"))
   document.querySelectorAll(".project-card").forEach((el) => el.classList.add("fade-in-up"))
+  document.querySelectorAll(".blog-post").forEach((el) => el.classList.add("fade-in-up"))
   document.querySelectorAll(".contact-form").forEach((el) => el.classList.add("fade-in-up"))
   document.querySelectorAll(".contact-info").forEach((el) => el.classList.add("fade-in-left"))
   document.querySelectorAll(".faq-item").forEach((el) => el.classList.add("fade-in-up"))
@@ -314,6 +315,7 @@ function initWaveBackground() {
     document.querySelector(".skills"),
     document.querySelector(".contact"),
     document.querySelector(".projects"),
+    document.querySelector(".blog"),
     document.querySelector(".testimonials"),
     document.querySelector(".faq"),
     
