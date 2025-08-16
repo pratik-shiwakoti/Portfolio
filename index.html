@@ -470,7 +470,8 @@ body {
     .nav-links {
       display: flex;
       list-style: none;
-      gap: 2rem;
+      gap: 1.5rem;
+      margin-right: 2rem;
     }
 
     .nav-links a {
@@ -3220,6 +3221,973 @@ body.dark-mode .countdown-display {
 body.dark-mode .popup-progress {
   background-color: var(--accent);
 }
+
+/* Blog Section */
+.blog {
+  background-color: var(--light-card);
+  position: relative;
+}
+
+body.dark-mode .blog {
+  background-color: var(--dark-card);
+}
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.blog-card {
+  background-color: var(--light-bg);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+body.dark-mode .blog-card {
+  background-color: var(--dark-bg);
+}
+
+.blog-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.blog-image-container {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.blog-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.blog-card:hover .blog-image {
+  transform: scale(1.1);
+}
+
+.blog-category {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 2;
+}
+
+.blog-category span {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: white;
+  padding: 0.375rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.blog-content {
+  padding: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.blog-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+  color: var(--light-text);
+  opacity: 0.7;
+}
+
+body.dark-mode .blog-meta {
+  color: var(--dark-text);
+}
+
+.blog-meta span {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.blog-meta i {
+  color: var(--primary);
+}
+
+.blog-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
+  color: var(--light-text);
+}
+
+body.dark-mode .blog-title {
+  color: var(--dark-text);
+}
+
+.blog-excerpt {
+  color: var(--light-text);
+  opacity: 0.8;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  flex: 1;
+}
+
+body.dark-mode .blog-excerpt {
+  color: var(--dark-text);
+}
+
+.blog-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+.blog-read-more {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  max-width: 40%;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.blog-read-more:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(59, 130, 246, 0.3);
+}
+
+.blog-read-more i {
+  transition: transform 0.3s ease;
+}
+
+.blog-read-more:hover i {
+  transform: translateX(4px);
+}
+
+.blog-share {
+  position: relative;
+}
+
+.share-btn {
+  background: none;
+  border: 1px solid var(--light-border);
+  color: var(--light-text);
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+
+body.dark-mode .share-btn {
+  border-color: var(--dark-border);
+  color: var(--dark-text);
+}
+
+.share-btn:hover {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.blog-load-more {
+  text-align: center;
+}
+
+/* Blog Modal */
+.blog-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  padding: 2rem;
+}
+
+.blog-modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.blog-modal {
+  background-color: var(--light-card);
+  border-radius: 1rem;
+  max-width: 800px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+}
+
+body.dark-mode .blog-modal {
+  background-color: var(--dark-card);
+}
+
+.blog-modal-overlay.active .blog-modal {
+  transform: scale(1);
+}
+
+.blog-modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  z-index: 10;
+  transition: var(--transition);
+}
+
+.blog-modal-close:hover {
+  background: rgba(0, 0, 0, 0.7);
+  transform: rotate(90deg);
+}
+
+.blog-modal-content {
+  padding: 2rem;
+}
+
+.blog-modal-header {
+  margin-bottom: 2rem;
+}
+
+.blog-modal-image {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.blog-modal-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--light-text);
+}
+
+body.dark-mode .blog-modal-title {
+  color: var(--dark-text);
+}
+
+.blog-modal-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--light-border);
+  color: var(--light-text);
+  opacity: 0.7;
+}
+
+body.dark-mode .blog-modal-meta {
+  border-bottom-color: var(--dark-border);
+  color: var(--dark-text);
+}
+
+.blog-modal-meta span {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.blog-modal-meta i {
+  color: var(--primary);
+}
+
+.blog-modal-body {
+  line-height: 1.8;
+  color: var(--light-text);
+}
+
+body.dark-mode .blog-modal-body {
+  color: var(--dark-text);
+}
+
+.blog-modal-body h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 2rem 0 1rem;
+  color: var(--primary);
+}
+
+.blog-modal-body p {
+  margin-bottom: 1.5rem;
+}
+
+.blog-modal-body ul {
+  margin: 1.5rem 0;
+  padding-left: 2rem;
+}
+
+.blog-modal-body li {
+  margin-bottom: 0.5rem;
+}
+
+.blog-modal-body code {
+  background-color: rgba(59, 130, 246, 0.1);
+  color: var(--primary);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.875rem;
+}
+
+body.dark-mode .blog-modal-body code {
+  background-color: rgba(59, 130, 246, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .blog-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .blog-actions {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+  
+  .blog-read-more,
+  .share-btn {
+    justify-content: center;
+  }
+  
+  .blog-modal {
+    margin: 1rem;
+    max-height: calc(100vh - 2rem);
+  }
+  
+  .blog-modal-content {
+    padding: 1.5rem;
+  }
+  
+  .blog-modal-title {
+    font-size: 1.5rem;
+  }
+  
+  .blog-modal-meta {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .blog-modal-overlay {
+    padding: 1rem;
+  }
+  
+  .blog-modal-content {
+    padding: 1rem;
+  }
+}
+
+/* ===== TABLET-SPECIFIC BREAKPOINTS (900px) ===== */
+
+@media (max-width: 900px) and (min-width: 769px) {
+  
+  /* ===== HEADER & NAVIGATION ===== */
+  .header-container {
+    padding: 1rem 0;
+  }
+  
+  .nav-links {
+    gap: 1rem;
+    margin-right: 1.5rem;
+  }
+  
+  .nav-links a {
+    font-size: 0.9rem;
+  }
+  
+  .header-actions {
+    gap: 1rem;
+  }
+  
+  .language-toggle,
+  .resume-btn-header {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.875rem;
+  }
+
+  /* ===== HERO SECTION ===== */
+  .hero {
+    padding: 4rem 0 3rem;
+  }
+  
+  .hero-content {
+    gap: 3rem;
+  }
+  
+  .hero-title {
+    font-size: 2.75rem;
+    line-height: 1.1;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.375rem;
+  }
+  
+  .hero-description {
+    font-size: 1rem;
+    max-width: 500px;
+  }
+  
+  .profile-img {
+    width: 250px;
+    height: 250px;
+  }
+  
+  .profile-bg {
+    width: 270px;
+    height: 270px;
+  }
+  
+  .hero-cta {
+    flex-direction: row;
+    gap: 0.75rem;
+  }
+  
+  .btn {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.9rem;
+  }
+
+  /* ===== SECTIONS ===== */
+  section {
+    padding: 4rem 0;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .section-subtitle {
+    font-size: 1rem;
+    max-width: 500px;
+  }
+
+  /* ===== ABOUT SECTION ===== */
+  .about-content {
+    gap: 3rem;
+  }
+  
+  .about-description {
+    font-size: 1rem;
+  }
+  
+  .tech-stack {
+    gap: 0.75rem;
+  }
+  
+  .tech-badge {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.875rem;
+  }
+
+  /* ===== SKILLS SECTION ===== */
+  .skills-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .skill-card {
+    padding: 1.75rem;
+  }
+  
+  .skill-icon {
+    font-size: 1.75rem;
+  }
+  
+  .skill-title {
+    font-size: 1.125rem;
+  }
+  
+  .skill-description {
+    font-size: 0.9rem;
+  }
+
+  /* ===== TIMELINE SECTION ===== */
+  .timeline {
+    max-width: 700px;
+  }
+  
+  .timeline-item {
+    padding: 0 2rem 2rem;
+  }
+  
+  .timeline-content {
+    padding: 1.25rem;
+  }
+  
+  .timeline-title {
+    font-size: 1.125rem;
+  }
+  
+  .timeline-description {
+    font-size: 0.9rem;
+  }
+
+  /* ===== PROJECTS SECTION ===== */
+  .projects-grid {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.75rem;
+  }
+  
+  .project-content {
+    padding: 1.25rem;
+  }
+  
+  .project-title {
+    font-size: 1.125rem;
+  }
+  
+  .project-description {
+    font-size: 0.9rem;
+  }
+  
+  .project-tag {
+    padding: 0.2rem 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  /* ===== BLOG SECTION ===== */
+  .blog-grid {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.75rem;
+  }
+  
+  .blog-content {
+    padding: 1.25rem;
+  }
+  
+  .blog-title {
+    font-size: 1.125rem;
+  }
+  
+  .blog-excerpt {
+    font-size: 0.9rem;
+  }
+  
+  .blog-meta {
+    font-size: 0.8rem;
+  }
+
+  /* ===== TESTIMONIALS ===== */
+  .testimonial {
+    padding: 1.75rem;
+  }
+  
+  .testimonial-text {
+    font-size: 1rem;
+  }
+  
+  .testimonial-controls {
+    gap: 0.75rem;
+  }
+  
+  .testimonial-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  /* ===== FAQ SECTION ===== */
+  .faq-container {
+    gap: 0.75rem;
+  }
+  
+  .faq-question {
+    padding: 1.25rem;
+  }
+  
+  .faq-question h3 {
+    font-size: 1rem;
+  }
+  
+  .faq-answer {
+    padding: 0 1.25rem;
+  }
+  
+  .faq-answer.active {
+    padding: 0 1.25rem 1.25rem;
+  }
+
+  /* ===== CONTACT SECTION ===== */
+  .contact-content {
+    gap: 3rem;
+  }
+  
+  .contact-form {
+    padding: 1.75rem;
+  }
+  
+  .contact-title {
+    font-size: 1.25rem;
+  }
+  
+  .contact-item {
+    margin-bottom: 1.25rem;
+  }
+  
+  .contact-icon {
+    width: 35px;
+    height: 35px;
+    font-size: 1.125rem;
+  }
+  
+  .quick-contact {
+    gap: 0.75rem;
+  }
+  
+  .quick-contact-link {
+    padding: 0.625rem 0.875rem;
+    font-size: 0.9rem;
+  }
+  
+  .social-links {
+    gap: 0.75rem;
+  }
+  
+  .social-link {
+    width: 35px;
+    height: 35px;
+    font-size: 1.125rem;
+  }
+
+  /* ===== FORM ELEMENTS ===== */
+  .form-control {
+    padding: 0.625rem 0.875rem;
+    font-size: 0.9rem;
+  }
+  
+  .btn-submit,
+  .btn-next,
+  .btn-prev {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.9rem;
+  }
+  
+  .progress-step {
+    width: 28px;
+    height: 28px;
+    font-size: 0.875rem;
+  }
+
+  /* ===== FOOTER ===== */
+  .footer-content {
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+  }
+  
+  .footer-links {
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .footer-link {
+    font-size: 0.9rem;
+  }
+  
+  .footer-bottom {
+    flex-direction: column;
+    gap: 0.75rem;
+    text-align: center;
+    font-size: 0.8rem;
+  }
+
+  /* ===== CHAT WIDGET ===== */
+  .chat-container {
+    width: 280px;
+    height: 380px;
+  }
+  
+  .chat-widget {
+    bottom: 4rem;
+    right: 1.25rem;
+  }
+  
+  .chat-button {
+    width: 55px;
+    height: 55px;
+    font-size: 1.375rem;
+  }
+
+  /* ===== POPUP MODALS ===== */
+  .popup-modal {
+    max-width: 450px;
+    margin: 1.5rem;
+  }
+  
+  .popup-content {
+    padding: 1.75rem;
+  }
+  
+  .popup-content h3 {
+    font-size: 1.375rem;
+  }
+  
+  .popup-content p {
+    font-size: 0.9rem;
+  }
+  
+  .popup-btn {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.9rem;
+  }
+
+  /* ===== BLOG MODAL ===== */
+  .blog-modal {
+    max-width: 700px;
+    margin: 1.5rem;
+  }
+  
+  .blog-modal-content {
+    padding: 1.75rem;
+  }
+  
+  .blog-modal-title {
+    font-size: 1.75rem;
+  }
+  
+  .blog-modal-image {
+    height: 250px;
+  }
+  
+  .blog-modal-meta {
+    gap: 1.25rem;
+    font-size: 0.875rem;
+  }
+
+  /* ===== ANALYTICS DASHBOARD ===== */
+  .analytics-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .analytics-card {
+    padding: 1.25rem;
+  }
+  
+  .analytics-icon {
+    width: 45px;
+    height: 45px;
+    font-size: 1.375rem;
+  }
+  
+  .analytics-number {
+    font-size: 1.375rem;
+  }
+  
+  .analytics-charts {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .analytics-chart-container {
+    padding: 1.5rem;
+    height: 280px;
+  }
+
+  /* ===== SCROLL ELEMENTS ===== */
+  .scroll-top {
+    width: 45px;
+    height: 45px;
+    bottom: 1.75rem;
+    right: 1.75rem;
+    font-size: 1.125rem;
+  }
+
+  /* ===== KEYBOARD NAVIGATION ===== */
+  .keyboard-nav-indicator {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  /* ===== POPUP MESSAGE ===== */
+  .popup-message {
+    padding: 0.7rem 0.9rem;
+    font-size: 0.9rem;
+  }
+
+  /* ===== PRELOADER ===== */
+  .loader {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .loader-inner-circle {
+    top: 12px;
+    left: 12px;
+    width: 46px;
+    height: 46px;
+  }
+  
+  .loader-logo {
+    font-size: 1.375rem;
+  }
+}
+
+/* ===== TABLET LANDSCAPE OPTIMIZATIONS (901px - 1024px) ===== */
+@media (max-width: 1024px) and (min-width: 901px) {
+  
+  /* ===== HERO SECTION LANDSCAPE ===== */
+  .hero-content {
+    gap: 2.5rem;
+  }
+  
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .profile-img {
+    width: 280px;
+    height: 280px;
+  }
+  
+  .profile-bg {
+    width: 300px;
+    height: 300px;
+  }
+
+  /* ===== SKILLS GRID LANDSCAPE ===== */
+  .skills-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+
+  /* ===== PROJECTS GRID LANDSCAPE ===== */
+  .projects-grid {
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  }
+
+  /* ===== BLOG GRID LANDSCAPE ===== */
+  .blog-grid {
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  }
+
+  /* ===== CONTACT SECTION LANDSCAPE ===== */
+  .contact-content {
+    gap: 2.5rem;
+  }
+}
+
+/* ===== TABLET PORTRAIT SPECIFIC (768px - 900px) ===== */
+@media (max-width: 900px) and (min-width: 768px) and (orientation: portrait) {
+  
+  /* ===== NAVIGATION ADJUSTMENTS ===== */
+  .nav-links {
+    display: none;
+  }
+  
+  .mobile-menu-btn {
+    display: block;
+  }
+  
+  .resume-btn-header {
+    display: none;
+  }
+
+  /* ===== HERO SECTION PORTRAIT ===== */
+  .hero-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 2rem;
+  }
+  
+  .hero-image {
+    order: -1;
+  }
+
+  /* ===== ABOUT CONTENT PORTRAIT ===== */
+  .about-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  /* ===== CONTACT CONTENT PORTRAIT ===== */
+  .contact-content {
+    flex-direction: column;
+  }
+}
+
+/* ===== FINE-TUNING FOR SPECIFIC TABLET SIZES ===== */
+
+/* iPad Air / iPad Pro 11" (820px) */
+@media (max-width: 820px) and (min-width: 769px) {
+  .container {
+    padding: 0 2rem;
+  }
+  
+  .hero-title {
+    font-size: 2.625rem;
+  }
+  
+  .section-title {
+    font-size: 2.125rem;
+  }
+}
+
+/* Surface Pro / iPad Pro 12.9" (1024px) */
+@media (max-width: 1024px) and (min-width: 1000px) {
+  .skills-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .blog-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
   </style>
 </head>
 <body>
@@ -3315,6 +4283,7 @@ const projects = [
             <li><a href="#skills">Skills</a></li>
             <li><a href="#experience">Experience</a></li>
             <li><a href="#projects">Projects</a></li>
+            <li><a href="#blog">Blog</a></li>
             <li><a href="#testimonials">Testimonials</a></li>
             <li><a href="#faq">FAQ</a></li>
             <li><a href="#contact">Contact</a></li>
@@ -3353,8 +4322,9 @@ const projects = [
     <ul class="mobile-menu-links">
       <li><a href="#about">About</a></li>
       <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Projects</a></li>
       <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#blog">Blog</a></li>
       <li><a href="#testimonials">Testimonials</a></li>
       <li><a href="#faq">FAQ</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -3736,7 +4706,122 @@ const projects = [
     </div>
   </section>
 
-  
+  <!-- Blog Section -->
+<section id="blog" class="blog">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title" data-translate="blogTitle">Blog</h2>
+      <p class="section-subtitle" data-translate="blogSubtitle">Sharing my knowledge and experiences</p>
+    </div>
+    
+    <div class="blog-grid">
+      <!-- Blog Post 1 -->
+      <article class="blog-card glass">
+        <div class="blog-image-container">
+          <img src="blog-post1.png" alt="Responsive Web Design" class="blog-image">
+          <div class="blog-category">
+            <span data-translate="webDevelopment">Web Development</span>
+          </div>
+        </div>
+        <div class="blog-content">
+          <div class="blog-meta">
+            <span class="blog-author">
+              <i class="fas fa-user"></i>
+              <span data-translate="webDeveloper">Web Developer</span>
+            </span>
+            <span class="blog-date">
+              <i class="fas fa-calendar"></i>
+              <span data-translate="december">Aug</span> 15, 2025
+            </span>
+            <span class="blog-read-time">
+              <i class="fas fa-clock"></i>
+              5 <span data-translate="readTime">min read</span>
+            </span>
+          </div>
+          <h3 class="blog-title" data-translate="blogPost1Title">Building Responsive Websites: My Journey</h3>
+          <p class="blog-excerpt" data-translate="blogPost1Excerpt">
+            Discover how I learned to create websites that work perfectly on all devices, from mobile phones to desktop computers. Tips, tricks, and lessons learned along the way.
+          </p>
+          <div class="blog-actions">
+            <button class="blog-read-more" data-post="1">
+              <span data-translate="readMore">Read More</span>
+              <i class="fas fa-arrow-right"></i>
+            </button>
+            <div class="blog-share">
+              <button class="share-btn" data-title="Building Responsive Websites: My Journey" data-url="#blog">
+                <i class="fas fa-share-alt"></i>
+                <span data-translate="share">Share</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Blog Post 2 -->
+      <article class="blog-card glass">
+        <div class="blog-image-container">
+          <img src="blog-post2.jpg" alt="Career Journey" class="blog-image">
+          <div class="blog-category">
+            <span data-translate="career">Career</span>
+          </div>
+        </div>
+        <div class="blog-content">
+          <div class="blog-meta">
+            <span class="blog-author">
+              <i class="fas fa-user"></i>
+              <span data-translate="webDeveloper">Web Developer</span>
+            </span>
+            <span class="blog-date">
+              <i class="fas fa-calendar"></i>
+              <span data-translate="december">Aug</span> 10, 2025
+            </span>
+            <span class="blog-read-time">
+              <i class="fas fa-clock"></i>
+              7 <span data-translate="readTime">min read</span>
+            </span>
+          </div>
+          <h3 class="blog-title" data-translate="blogPost2Title">From Student to Freelancer: Lessons Learned</h3>
+          <p class="blog-excerpt" data-translate="blogPost2Excerpt">
+            My personal journey from being a BIT student to working as a freelance web developer. Challenges faced, mistakes made, and valuable lessons learned.
+          </p>
+          <div class="blog-actions">
+            <button class="blog-read-more" data-post="2">
+              <span data-translate="readMore">Read More</span>
+              <i class="fas fa-arrow-right"></i>
+            </button>
+            <div class="blog-share">
+              <button class="share-btn" data-title="From Student to Freelancer: Lessons Learned" data-url="#blog">
+                <i class="fas fa-share-alt"></i>
+                <span data-translate="share">Share</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Load More Button -->
+    <div class="blog-load-more">
+      <button class="btn btn-outline" id="load-more-posts">
+        <i class="fas fa-plus"></i>
+        <span data-translate="loadMore">Load More Posts</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Blog Post Modal -->
+<div class="blog-modal-overlay" id="blogModalOverlay">
+  <div class="blog-modal">
+    <button class="blog-modal-close" id="blogModalClose">
+      <i class="fas fa-times"></i>
+    </button>
+    <div class="blog-modal-content" id="blogModalContent">
+      <!-- Content will be dynamically inserted here -->
+    </div>
+  </div>
+</div>
+
   <!-- Testimonials Section -->
   <section id="testimonials" class="testimonials">
     <div class="container">
@@ -4196,8 +5281,9 @@ const projects = [
         <div class="footer-links">
           <a href="#about" class="footer-link">About</a>
           <a href="#skills" class="footer-link">Skills</a>
-          <a href="#projects" class="footer-link">Projects</a>
           <a href="#experience" class="footer-link">Experience</a>
+          <a href="#projects" class="footer-link">Projects</a>
+          <a href="#blog" class="footer-link">Blog</a>
           <a href="#testimonials" class="footer-link">Testimonials</a>
           <a href="#faq" class="footer-link">FAQ</a>
           <a href="#contact" class="footer-link">Contact</a>
@@ -4385,6 +5471,22 @@ const projects = [
     footerCopyright: "© 2025 Pratik Shiwakoti. All rights reserved.",
     madeWithLove: "Made with ❤️ in Nepal",
 
+    // blog Section
+  blogTitle: "Blog",
+blogSubtitle: "Sharing my knowledge and experiences",
+webDevelopment: "Web Development",
+career: "Career",
+readTime: "min read",
+webDeveloper: "Web Developer",
+readMore: "Read More",
+loadMore: "Load More Posts",
+december: "Dec",
+blogPost1Title: "Building Responsive Websites: My Journey",
+blogPost1Excerpt: "Discover how I learned to create websites that work perfectly on all devices, from mobile phones to desktop computers. Tips, tricks, and lessons learned along the way.",
+blogPost2Title: "From Student to Freelancer: Lessons Learned",
+blogPost2Excerpt: "My personal journey from being a BIT student to working as a freelance web developer. Challenges faced, mistakes made, and valuable lessons learned.",
+share: "Share",  
+
     // Language Change
     languageChanged: "Language changed"
   },
@@ -4476,6 +5578,21 @@ projectPopupMore: "थप परियोजनाहरू हेर्नु�
 footerCopyright: "© २०२५ प्रतीक शिवाकोटी। सर्वाधिकार सुरक्षित।",
 madeWithLove: "नेपालमा ❤️ सँग बनाइएको",
 
+// blog Section
+blogTitle: "ब्लग",
+blogSubtitle: "मेरो ज्ञान र अनुभवहरू साझा गर्दै",
+webDevelopment: "वेब विकास",
+career: "करियर",
+readTime: "मिनेट पढ्ने समय",
+webDeveloper: "वेब विकासकर्ता",
+readMore: "थप पढ्नुहोस्",
+loadMore: "थप पोस्टहरू लोड गर्नुहोस्",
+december: "डिसेम्बर",
+blogPost1Title: "उत्तरदायी वेबसाइटहरू निर्माण: मेरो यात्रा",
+blogPost1Excerpt: "मोबाइल फोनदेखि डेस्कटप कम्प्युटरसम्म सबै उपकरणहरूमा राम्रोसँग काम गर्ने वेबसाइटहरू कसरी बनाउने भनेर मैले सिकेको कुरा पत्ता लगाउनुहोस्।",
+blogPost2Title: "विद्यार्थीदेखि फ्रीलान्सरसम्म: सिकेका पाठहरू",
+blogPost2Excerpt: "BIT विद्यार्थी भएदेखि फ्रीलान्स वेब विकासकर्ताको रूपमा काम गर्नेसम्मको मेरो व्यक्तिगत यात्रा।",
+share: "साझा गर्नुहोस्",
     // Language Change
     languageChanged: "भाषा परिवर्तन गरियो"
   }
@@ -5818,16 +6935,29 @@ if (!offerDeadline) {
   });
   </script>
   <script>
-  // Disable right-click
-  document.addEventListener("contextmenu", e => e.preventDefault());
+  // Disable right-click initially
+  let rightClickDisabled = true;
+  
+  function disableRightClick(e) {
+    e.preventDefault();
+  }
+  
+  document.addEventListener("contextmenu", disableRightClick);
 
   let isAdmin = false;
 
   function enableAdminMode() {
     isAdmin = true;
+    rightClickDisabled = false;
+    
+    // Remove right-click prevention
+    document.removeEventListener("contextmenu", disableRightClick);
+    
     console.clear();
     console.log("🔓 DevTools protection disabled.");
-    alert("You can now open Developer Tools.");
+    console.log("🖱️ Right-click enabled.");
+    alert("Admin mode activated! You can now:\n• Open Developer Tools\n• Right-click anywhere\n• Access all browser features");
+    
     document.onkeydown = null; // remove blocking
   }
 
@@ -5870,7 +7000,346 @@ if (!offerDeadline) {
     }
   }, 1000);
 </script>
+<script>
+  // Blog functionality
+document.addEventListener('DOMContentLoaded', function() {
+  // Blog post data
+  const blogPosts = {
+    1: {
+      title: "Building Responsive Websites: My Journey",
+      titleNp: "उत्तरदायी वेबसाइटहरू निर्माण: मेरो यात्रा",
+      image: "/placeholder.svg?height=300&width=800",
+      category: "Web Development",
+      categoryNp: "वेब विकास",
+      author: "Web Developer",
+      authorNp: "वेब विकासकर्ता",
+      date: "Dec 15, 2024",
+      dateNp: "डिसेम्बर १५, २०२४",
+      readTime: "5 min read",
+      readTimeNp: "५ मिनेट पढ्ने समय",
+      content: `
+        <p>When I first started learning web development, I had no idea how important responsive design would become in my journey. Today, I want to share my experience and the lessons I've learned about creating websites that work beautifully on every device.</p>
+        
+        <h3>The Challenge</h3>
+        <p>As a BIT student at Bhaktapur Multiple Campus, I was initially focused on making websites that looked good on my laptop screen. It wasn't until I started showing my projects to friends and family that I realized the problem - my websites looked terrible on their phones!</p>
+        
+        <h3>Learning the Fundamentals</h3>
+        <p>I dove deep into CSS media queries, flexible layouts, and mobile-first design principles. Here are the key concepts that transformed my approach:</p>
+        
+        <ul>
+          <li><strong>Mobile-First Design:</strong> Starting with mobile layouts and progressively enhancing for larger screens</li>
+          <li><strong>Flexible Grid Systems:</strong> Using CSS Grid and Flexbox for adaptable layouts</li>
+          <li><strong>Responsive Images:</strong> Implementing <code>srcset</code> and <code>picture</code> elements for optimal image loading</li>
+          <li><strong>Touch-Friendly Interfaces:</strong> Designing with finger navigation in mind</li>
+        </ul>
+        
+        <h3>Tools That Made a Difference</h3>
+        <p>Throughout my learning process, I discovered several tools that significantly improved my workflow:</p>
+        
+        <ul>
+          <li>Chrome DevTools for device simulation</li>
+          <li>CSS frameworks like Bootstrap and Tailwind CSS</li>
+          <li>Online testing tools for cross-device compatibility</li>
+          <li>Performance monitoring tools</li>
+        </ul>
+        
+        <h3>Real-World Application</h3>
+        <p>When I built the Hikemandu website, I applied all these principles from the ground up. The result was a website that works seamlessly whether someone is planning their trek on a desktop or checking trail information on their phone during the hike.</p>
+        
+        <h3>Key Takeaways</h3>
+        <p>Responsive design isn't just about making things fit on smaller screens - it's about creating inclusive experiences that work for everyone, regardless of their device or circumstances. This mindset has shaped not just my technical skills, but my entire approach to web development.</p>
+        
+        <p>If you're just starting your web development journey, my advice is simple: think mobile-first, test on real devices, and never assume your users have the same setup as you do.</p>
+      `,
+      contentNp: `
+        <p>जब मैले पहिलो पटक वेब विकास सिक्न थालें, मलाई थाहा थिएन कि मेरो यात्रामा उत्तरदायी डिजाइन कत्ति महत्वपूर्ण हुनेछ। आज, म हरेक उपकरणमा राम्रोसँग काम गर्ने वेबसाइटहरू बनाउने बारेमा मेरो अनुभव र सिकेका पाठहरू साझा गर्न चाहन्छु।</p>
+        
+        <h3>चुनौती</h3>
+        <p>भक्तपुर बहुमुखी क्याम्पसमा BIT विद्यार्थीको रूपमा, म सुरुमा मेरो ल्यापटप स्क्रिनमा राम्रो देखिने वेबसाइटहरू बनाउनमा केन्द्रित थिएँ। मैले साथीहरू र परिवारलाई मेरा परियोजनाहरू देखाउन थालेपछि मात्र समस्या बुझें - मेरा वेबसाइटहरू उनीहरूका फोनमा भयानक देखिन्थे!</p>
+        
+        <h3>आधारभूत कुराहरू सिक्दै</h3>
+        <p>मैले CSS मिडिया क्वेरीहरू, लचिलो लेआउटहरू, र मोबाइल-फर्स्ट डिजाइन सिद्धान्तहरूमा गहिरो अध्ययन गरें। यहाँ मुख्य अवधारणाहरू छन् जसले मेरो दृष्टिकोणलाई परिवर्तन गर्यो:</p>
+        
+        <ul>
+          <li><strong>मोबाइल-फर्स्ट डिजाइन:</strong> मोबाइल लेआउटबाट सुरु गरेर ठूला स्क्रिनका लागि क्रमशः सुधार गर्ने</li>
+          <li><strong>लचिलो ग्रिड प्रणाली:</strong> अनुकूलनीय लेआउटका लागि CSS Grid र Flexbox प्रयोग गर्ने</li>
+          <li><strong>उत्तरदायी छविहरू:</strong> इष्टतम छवि लोडिङका लागि <code>srcset</code> र <code>picture</code> तत्वहरू कार्यान्वयन गर्ने</li>
+          <li><strong>स्पर्श-मैत्री इन्टरफेसहरू:</strong> औंला नेभिगेसनलाई ध्यानमा राखेर डिजाइन गर्ने</li>
+        </ul>
+        
+        <h3>फरक पार्ने उपकरणहरू</h3>
+        <p>मेरो सिकाइ प्रक्रियामा, मैले धेरै उपकरणहरू फेला पारें जसले मेरो कार्यप्रवाहलाई उल्लेखनीय रूपमा सुधार गर्यो:</p>
+        
+        <ul>
+          <li>उपकरण सिमुलेशनका लागि Chrome DevTools</li>
+          <li>Bootstrap र Tailwind CSS जस्ता CSS फ्रेमवर्कहरू</li>
+          <li>क्रस-डिभाइस अनुकूलताका लागि अनलाइन परीक्षण उपकरणहरू</li>
+          <li>प्रदर्शन निगरानी उपकरणहरू</li>
+        </ul>
+        
+        <h3>वास्तविक संसारमा प्रयोग</h3>
+        <p>जब मैले हाइकमाण्डु वेबसाइट बनाएँ, मैले यी सबै सिद्धान्तहरूलाई सुरुदेखि नै लागू गरें। परिणाम एउटा वेबसाइट थियो जुन डेस्कटपमा ट्रेकिङ योजना बनाउँदा वा हाइकिङको क्रममा फोनमा ट्रेल जानकारी जाँच गर्दा निर्बाध रूपमा काम गर्छ।</p>
+        
+        <h3>मुख्य सिकाइहरू</h3>
+        <p>उत्तरदायी डिजाइन भनेको केवल साना स्क्रिनमा चीजहरू फिट गराउने मात्र होइन - यो सबैका लागि समावेशी अनुभवहरू सिर्जना गर्ने हो, तिनीहरूको उपकरण वा परिस्थितिलाई ध्यान नदिई। यो मानसिकताले मेरो प्राविधिक सीपहरू मात्र नभएर वेब विकासप्रतिको मेरो सम्पूर्ण दृष्टिकोणलाई आकार दिएको छ।</p>
+        
+        <p>यदि तपाईं भर्खरै आफ्नो वेब विकास यात्रा सुरु गर्दै हुनुहुन्छ भने, मेरो सल्लाह सरल छ: मोबाइल-फर्स्ट सोच्नुहोस्, वास्तविक उपकरणहरूमा परीक्षण गर्नुहोस्, र तपाईंका प्रयोगकर्ताहरूसँग तपाईं जस्तै सेटअप छ भनेर कहिल्यै नमान्नुहोस्।</p>
+      `
+    },
+    2: {
+      title: "From Student to Freelancer: Lessons Learned",
+      titleNp: "विद्यार्थीदेखि फ्रीलान्सरसम्म: सिकेका पाठहरू",
+      image: "/placeholder.svg?height=300&width=800",
+      category: "Career",
+      categoryNp: "करियर",
+      author: "Web Developer",
+      authorNp: "वेब विकासकर्ता",
+      date: "Dec 10, 2024",
+      dateNp: "डिसेम्बर १०, २०२४",
+      readTime: "7 min read",
+      readTimeNp: "७ मिनेट पढ्ने समय",
+      content: `
+        <p>Transitioning from being a student to working as a freelance web developer has been one of the most challenging yet rewarding experiences of my life. Here's my honest account of the journey, including the mistakes I made and the valuable lessons I learned along the way.</p>
+        
+        <h3>The Beginning</h3>
+        <p>As a BIT student at Bhaktapur Multiple Campus, I was comfortable in the structured environment of academic learning. I had good grades, understood the theoretical concepts, and could complete assignments on time. However, the real world of client work was completely different.</p>
+        
+        <h3>First Client Challenges</h3>
+        <p>My first freelance project was a disaster. I underestimated the time required, didn't communicate effectively with the client, and delivered something that barely met their expectations. Here's what went wrong:</p>
+        
+        <ul>
+          <li><strong>Poor Time Management:</strong> I quoted 2 weeks for a project that actually took 6 weeks</li>
+          <li><strong>Scope Creep:</strong> I didn't define project boundaries clearly, leading to endless revisions</li>
+          <li><strong>Technical Debt:</strong> I rushed the code, creating maintenance nightmares</li>
+          <li><strong>Communication Gaps:</strong> I assumed the client understood technical jargon</li>
+        </ul>
+        
+        <h3>Learning from Mistakes</h3>
+        <p>After that initial setback, I knew I had to change my approach. I spent time learning not just technical skills, but also business and communication skills:</p>
+        
+        <ul>
+          <li>Project management and time estimation techniques</li>
+          <li>Clear contract writing and scope definition</li>
+          <li>Regular client communication and progress updates</li>
+          <li>Code quality and documentation standards</li>
+          <li>Pricing strategies and value proposition</li>
+        </ul>
+        
+        <h3>Building a Portfolio</h3>
+        <p>One of the biggest challenges was building credibility without extensive work experience. I tackled this by:</p>
+        
+        <ul>
+          <li>Creating personal projects that showcased my skills</li>
+          <li>Contributing to open-source projects</li>
+          <li>Building a professional portfolio website</li>
+          <li>Documenting my learning journey through blog posts</li>
+          <li>Networking with other developers and potential clients</li>
+        </ul>
+        
+        <h3>The Hikemandu Project</h3>
+        <p>The turning point came when I decided to build Hikemandu, a platform for trekking enthusiasts in Nepal. This project allowed me to:</p>
+        
+        <ul>
+          <li>Apply all my technical skills in a real-world context</li>
+          <li>Understand user needs and market requirements</li>
+          <li>Practice project management from conception to deployment</li>
+          <li>Create something meaningful for my community</li>
+        </ul>
+        
+        <h3>Current Status and Future Goals</h3>
+        <p>Today, I'm successfully balancing my studies with freelance work. I've learned that being a freelancer isn't just about coding - it's about running a business, managing relationships, and continuously learning.</p>
+        
+        <h3>Advice for Fellow Students</h3>
+        <p>If you're a student considering freelancing, here's my advice:</p>
+        
+        <ul>
+          <li>Start small and gradually take on bigger projects</li>
+          <li>Invest time in learning business skills alongside technical skills</li>
+          <li>Build a strong portfolio before seeking clients</li>
+          <li>Don't undervalue your work, but be realistic about your experience level</li>
+          <li>Always deliver more than promised</li>
+          <li>Learn from every project, especially the difficult ones</li>
+        </ul>
+        
+        <p>The journey from student to freelancer is challenging, but it's also incredibly rewarding. Every project teaches you something new, and every client interaction helps you grow both professionally and personally.</p>
+      `,
+      contentNp: `
+        <p>विद्यार्थी भएदेखि फ्रीलान्स वेब विकासकर्ताको रूपमा काम गर्नेसम्मको संक्रमण मेरो जीवनको सबैभन्दा चुनौतीपूर्ण तर पुरस्कृत अनुभवहरू मध्ये एक भएको छ। यहाँ मेरो इमानदार विवरण छ, जसमा मैले गरेका गल्तीहरू र बाटोमा सिकेका बहुमूल्य पाठहरू समावेश छन्।</p>
+        
+        <h3>सुरुवात</h3>
+        <p>भक्तपुर बहुमुखी क्याम्पसमा BIT विद्यार्थीको रूपमा, म शैक्षिक सिकाइको संरचित वातावरणमा सहज थिएँ। मेरो राम्रो अंक थियो, सैद्धान्तिक अवधारणाहरू बुझ्थें, र समयमै असाइनमेन्टहरू पूरा गर्न सक्थें। तर, ग्राहक कामको वास्तविक संसार पूर्णतया फरक थियो।</p>
+        
+        <h3>पहिलो ग्राहकका चुनौतीहरू</h3>
+        <p>मेरो पहिलो फ्रीलान्स परियोजना एक विपत्ति थियो। मैले आवश्यक समयलाई कम अनुमान गरें, ग्राहकसँग प्रभावकारी संवाद गरिनँ, र तिनीहरूको अपेक्षालाई मुश्किलले पूरा गर्ने कुरा डेलिभर गरें। यहाँ के गलत भयो:</p>
+        
+        <ul>
+          <li><strong>खराब समय व्यवस्थापन:</strong> मैले २ हप्ताको लागि कोट गरेको परियोजनालाई वास्तवमा ६ हप्ता लाग्यो</li>
+          <li><strong>स्कोप क्रिप:</strong> मैले परियोजनाको सीमाहरू स्पष्ट रूपमा परिभाषित गरिनँ, जसले अनन्त संशोधनहरू निम्त्यायो</li>
+          <li><strong>प्राविधिक ऋण:</strong> मैले कोडलाई हतार गरें, मर्मतसम्भारको दुःस्वप्न सिर्जना गर्दै</li>
+          <li><strong>संचार अन्तरहरू:</strong> मैले ग्राहकले प्राविधिक शब्दजाल बुझ्छ भनेर मानें</li>
+        </ul>
+        
+        <h3>गल्तीहरूबाट सिक्दै</h3>
+        <p>त्यो प्रारम्भिक असफलता पछि, मलाई थाहा थियो कि मैले मेरो दृष्टिकोण परिवर्तन गर्नुपर्छ। मैले प्राविधिक सीपहरू मात्र नभएर व्यापार र संचार सीपहरू पनि सिक्न समय बिताएँ:</p>
+        
+        <ul>
+          <li>परियोजना व्यवस्थापन र समय अनुमान प्रविधिहरू</li>
+          <li>स्पष्ट सम्झौता लेखन र स्कोप परिभाषा</li>
+          <li>नियमित ग्राहक संचार र प्रगति अपडेटहरू</li>
+          <li>कोड गुणस्तर र कागजात मापदण्डहरू</li>
+          <li>मूल्य निर्धारण रणनीतिहरू र मूल्य प्रस्ताव</li>
+        </ul>
+        
+        <h3>पोर्टफोलियो निर्माण</h3>
+        <p>व्यापक कार्य अनुभव बिना विश्वसनीयता निर्माण गर्नु सबैभन्दा ठूलो चुनौतीहरू मध्ये एक थियो। मैले यसलाई यसरी सम्बोधन गरें:</p>
+        
+        <ul>
+          <li>मेरो सीपहरू प्रदर्शन गर्ने व्यक्तिगत परियोजनाहरू सिर्जना गर्दै</li>
+          <li>खुला स्रोत परियोजनाहरूमा योगदान गर्दै</li>
+          <li>एक पेशेवर पोर्टफोलियो वेबसाइट निर्माण गर्दै</li>
+          <li>ब्लग पोस्टहरू मार्फत मेरो सिकाइ यात्रा दस्तावेजीकरण गर्दै</li>
+          <li>अन्य विकासकर्ताहरू र सम्भावित ग्राहकहरूसँग नेटवर्किङ गर्दै</li>
+        </ul>
+        
+        <h3>हाइकमाण्डु परियोजना</h3>
+        <p>मोडको बिन्दु आयो जब मैले हाइकमाण्डु, नेपालमा ट्रेकिङ प्रेमीहरूका लागि एक प्लेटफर्म निर्माण गर्ने निर्णय गरें। यो परियोजनाले मलाई अनुमति दियो:</p>
+        
+        <ul>
+          <li>वास्तविक संसारको सन्दर्भमा मेरा सबै प्राविधिक सीपहरू लागू गर्न</li>
+          <li>प्रयोगकर्ताको आवश्यकता र बजार आवश्यकताहरू बुझ्न</li>
+          <li>अवधारणादेखि तैनातीसम्म परियोजना व्यवस्थापन अभ्यास गर्न</li>
+          <li>मेरो समुदायका लागि अर्थपूर्ण कुरा सिर्जना गर्न</li>
+        </ul>
+        
+        <h3>हालको स्थिति र भविष्यका लक्ष्यहरू</h3>
+        <p>आज, म सफलतापूर्वक मेरो अध्ययनलाई फ्रीलान्स कामसँग सन्तुलन गर्दै छु। मैले सिकेको छु कि फ्रीलान्सर हुनु भनेको केवल कोडिङ मात्र होइन - यो व्यापार चलाउने, सम्बन्धहरू व्यवस्थापन गर्ने, र निरन्तर सिक्ने बारेमा हो।</p>
+        
+        <h3>सहपाठी विद्यार्थीहरूका लागि सल्लाह</h3>
+        <p>यदि तपाईं फ्रीलान्सिङ विचार गर्ने विद्यार्थी हुनुहुन्छ भने, यहाँ मेरो सल्लाह छ:</p>
+        
+        <ul>
+          <li>सानो सुरु गर्नुहोस् र क्रमशः ठूला परियोजनाहरू लिनुहोस्</li>
+          <li>प्राविधिक सीपहरूसँगै व्यापारिक सीपहरू सिक्न समय लगानी गर्नुहोस्</li>
+          <li>ग्राहकहरू खोज्नु अघि बलियो पोर्टफोलियो निर्माण गर्नुहोस्</li>
+          <li>आफ्नो कामलाई कम मूल्याङ्कन नगर्नुहोस्, तर आफ्नो अनुभव स्तरको बारेमा यथार्थवादी बन्नुहोस्</li>
+          <li>सधैं प्रतिज्ञा गरेको भन्दा बढी डेलिभर गर्नुहोस्</li>
+          <li>हरेक परियोजनाबाट सिक्नुहोस्, विशेष गरी कठिन परियोजनाहरूबाट</li>
+        </ul>
+        
+        <p>विद्यार्थीदेखि फ्रीलान्सरसम्मको यात्रा चुनौतीपूर्ण छ, तर यो अविश्वसनीय रूपमा पुरस्कृत पनि छ। हरेक परियोजनाले तपाईंलाई केही नयाँ सिकाउँछ, र हरेक ग्राहक अन्तरक्रियाले तपाईंलाई व्यावसायिक र व्यक्तिगत दुवै रूपमा बढ्न मद्दत गर्छ।</p>
+      `
+    }
+  };
 
+  // Modal elements
+  const blogModalOverlay = document.getElementById('blogModalOverlay');
+  const blogModalClose = document.getElementById('blogModalClose');
+  const blogModalContent = document.getElementById('blogModalContent');
+
+  // Read more buttons
+  const readMoreButtons = document.querySelectorAll('.blog-read-more');
+  readMoreButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      const postId = this.getAttribute('data-post');
+      openBlogModal(postId);
+    });
+  });
+
+  // Share buttons
+  const shareButtons = document.querySelectorAll('.share-btn');
+  shareButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      const title = this.getAttribute('data-title');
+      const url = window.location.href + this.getAttribute('data-url');
+      
+      if (navigator.share) {
+        navigator.share({
+          title: title,
+          url: url
+        });
+      } else {
+        // Fallback for browsers that don't support Web Share API
+        const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`;
+        window.open(shareUrl, '_blank', 'width=600,height=400');
+      }
+    });
+  });
+
+  // Load more button
+  const loadMoreBtn = document.getElementById('load-more-posts');
+  if (loadMoreBtn) {
+    loadMoreBtn.addEventListener('click', function() {
+      // Simulate loading more posts
+      showPopup('More posts coming soon! 📝');
+    });
+  }
+
+  // Modal functions
+  function openBlogModal(postId) {
+    const post = blogPosts[postId];
+    if (!post) return;
+
+    const currentLang = isNepali ? 'np' : 'en';
+    const title = currentLang === 'np' ? post.titleNp : post.title;
+    const category = currentLang === 'np' ? post.categoryNp : post.category;
+    const author = currentLang === 'np' ? post.authorNp : post.author;
+    const date = currentLang === 'np' ? post.dateNp : post.date;
+    const readTime = currentLang === 'np' ? post.readTimeNp : post.readTime;
+    const content = currentLang === 'np' ? post.contentNp : post.content;
+
+    blogModalContent.innerHTML = `
+      <div class="blog-modal-header">
+        <img src="${post.image}" alt="${title}" class="blog-modal-image">
+        <h1 class="blog-modal-title">${title}</h1>
+        <div class="blog-modal-meta">
+          <span>
+            <i class="fas fa-tag"></i>
+            ${category}
+          </span>
+          <span>
+            <i class="fas fa-user"></i>
+            ${author}
+          </span>
+          <span>
+            <i class="fas fa-calendar"></i>
+            ${date}
+          </span>
+          <span>
+            <i class="fas fa-clock"></i>
+            ${readTime}
+          </span>
+        </div>
+      </div>
+      <div class="blog-modal-body">
+        ${content}
+      </div>
+    `;
+
+    blogModalOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeBlogModal() {
+    blogModalOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // Modal close events
+  blogModalClose.addEventListener('click', closeBlogModal);
+  
+  blogModalOverlay.addEventListener('click', function(e) {
+    if (e.target === blogModalOverlay) {
+      closeBlogModal();
+    }
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && blogModalOverlay.classList.contains('active')) {
+      closeBlogModal();
+    }
+  });
+});
+</script>
 
   <script src="animation.js"></script>
 </body>
